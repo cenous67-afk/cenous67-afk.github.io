@@ -14,7 +14,7 @@
       "creator_steamid": "0",
       "last_update_steamid": "0",
       "event_notes": "auto added",
-      "imageUrl": "https://static.wikia.nocookie.net/cswikia/images/7/7f/Sirocco-center.png/revision/latest/scale-to-width-down/1000?cb=20211020085720
+      "imageUrl": "https://static.wikia.nocookie.net/cswikia/images/7/7f/Sirocco-center.png/revision/latest/scale-to-width-down/1000?cb=20211020085720",
       "jsondata": "{\"localized_title_image\": [\"https://static.wikia.nocookie.net/cswikia/images/7/7f/Sirocco-center.png/revision/latest/scale-to-width-down/1000?cb=20211020085720\", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], \"localized_capsule_image\": [\"https://upload.wikimedia.org/wikipedia/ru/e/ec/Csgo_screen.jpg\", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], \"bSaleEnabled\": false, \"sale_show_creator\": false, \"sale_sections\": [], \"sale_browsemore_text\": \"\", \"sale_browsemore_url\": \"\", \"sale_browsemore_color\": \"\", \"sale_browsemore_bgcolor\": \"\", \"referenced_appids\": [], \"bBroadcastEnabled\": false, \"broadcastChatSetting\": \"hide\", \"default_broadcast_title\": \"#Broadcast_default_title_dev\", \"broadcast_whitelist\": [], \"bScheduleEnabled\": false, \"scheduleEntries\": [], \"automatically_push_updated_source\": true}",
       "announcement_body": {
         "gid": "100000000000000012",
