@@ -6,138 +6,361 @@
   <title>ChmonyaClient | CS:GO Legacy</title>
   <meta name="description" content="Ностальгический мод для CS:GO">
   <link rel="icon" href="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/730/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-    * { font-family: 'Inter', system-ui, sans-serif; }
-    body { background: #0a0e14; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0a0e14; }
     .btn-csgo {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 13px;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px;
+      font-weight: 600; font-size: 13px;
       border: 1px solid rgba(255,255,255,0.06);
       background: rgba(255,255,255,0.03);
-      color: #8a93a8;
-      transition: all 0.2s;
-      text-decoration: none;
-      cursor: pointer;
+      color: #8a93a8; transition: all 0.2s;
+      text-decoration: none; cursor: pointer;
     }
     .btn-csgo:hover { background: rgba(255,255,255,0.08); color: #fff; transform: translateY(-1px); }
     .btn-csgo-primary {
       background: linear-gradient(135deg, #9b59b6, #8e44ad);
-      color: #fff;
-      border: none;
+      color: #fff; border: none;
       box-shadow: 0 4px 20px rgba(155,89,182,0.3);
     }
-    .btn-csgo-primary:hover { background: linear-gradient(135deg, #af7ac5, #9b59b6); color: #fff; box-shadow: 0 6px 30px rgba(155,89,182,0.4); }
+    .btn-csgo-primary:hover { background: linear-gradient(135deg, #af7ac5, #9b59b6); box-shadow: 0 6px 30px rgba(155,89,182,0.4); }
     .text-purple { color: #9b59b6; }
-    .border-purple { border-color: #9b59b6; }
     .bg-purple { background: #9b59b6; }
     .bg-purple\/10 { background: rgba(155,89,182,0.1); }
     .bg-purple\/5 { background: rgba(155,89,182,0.05); }
-    .shadow-purple\/20 { box-shadow: 0 0 30px rgba(155,89,182,0.2); }
     .border-purple\/20 { border-color: rgba(155,89,182,0.2); }
     .border-purple\/30 { border-color: rgba(155,89,182,0.3); }
     .border-purple\/40 { border-color: rgba(155,89,182,0.4); }
-    .hover\:bg-\[\#9b59b6\]\/10:hover { background: rgba(155,89,182,0.1); }
-    .hover\:border-\[\#9b59b6\]\/30:hover { border-color: rgba(155,89,182,0.3); }
-    .hover\:text-\[\#9b59b6\]:hover { color: #9b59b6; }
-    .group:hover .group-hover\:text-\[\#9b59b6\] { color: #9b59b6; }
     .bg-\[\#0d1018\] { background: #0d1018; }
     .bg-\[\#0f141b\] { background: #0f141b; }
-    .bg-\[\#111820\] { background: #111820; }
     .bg-\[\#0a0d12\] { background: #0a0d12; }
     .bg-\[rgba\(10\,12\,16\,0\.95\)\] { background: rgba(10,12,16,0.95); }
     .border-\[rgba\(60\,70\,92\,0\.3\)\] { border-color: rgba(60,70,92,0.3); }
     .text-\[\#8a93a8\] { color: #8a93a8; }
     .text-\[\#8a93a8\]\/60 { color: rgba(138,147,168,0.6); }
     .text-\[\#8a93a8\]\/70 { color: rgba(138,147,168,0.7); }
-    .text-\[\#8a93a8\]\/80 { color: rgba(138,147,168,0.8); }
     .border-white\/5 { border-color: rgba(255,255,255,0.05); }
     .border-white\/10 { border-color: rgba(255,255,255,0.1); }
     .border-white\/20 { border-color: rgba(255,255,255,0.2); }
     .bg-white\/\[0\.03\] { background: rgba(255,255,255,0.03); }
     .bg-white\/10 { background: rgba(255,255,255,0.1); }
-    .from-\[\#111820\]\/50 { --tw-gradient-from: rgba(17,24,32,0.5); }
-    .via-\[\#111820\]\/65 { --tw-gradient-via: rgba(17,24,32,0.65); }
-    .to-\[\#111820\] { --tw-gradient-to: #111820; }
-
     .hero-bg {
       background-image: url('https://clan.fastly.steamstatic.com/images//3381077/d248ae7370e1fc5337dc8ad3cb15ecafc4e8abc6.png');
-      background-size: cover;
-      background-position: center;
-      background-blend-mode: overlay;
+      background-size: cover; background-position: center; background-blend-mode: overlay;
     }
-    .hero-overlay {
-      background: linear-gradient(180deg, rgba(10,14,20,0.4) 0%, rgba(10,14,20,0.85) 70%, rgba(10,14,20,1) 100%);
-    }
-    .glow-purple {
-      box-shadow: 0 0 60px rgba(155,89,182,0.15);
-    }
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .card-hover:hover {
-      transform: translateY(-4px);
-      border-color: rgba(155,89,182,0.3);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    }
+    .hero-overlay { background: linear-gradient(180deg, rgba(10,14,20,0.4) 0%, rgba(10,14,20,0.85) 70%, rgba(10,14,20,1) 100%); }
+    .glow-purple { box-shadow: 0 0 60px rgba(155,89,182,0.15); }
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-4px); border-color: rgba(155,89,182,0.3); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
     .gradient-text {
       background: linear-gradient(135deg, #9b59b6, #c39bd3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .news-img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 8px 8px 0 0;
-    }
-
-    /* ===== АНИМАЦИИ ===== */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .animate-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .news-img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px 8px 0 0; }
+    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
     .delay-100 { transition-delay: 100ms; }
     .delay-200 { transition-delay: 200ms; }
     .delay-300 { transition-delay: 300ms; }
-    .delay-400 { transition-delay: 400ms; }
+    html { scroll-behavior: smooth; }
+    .icon-img { width: 100%; height: 100%; object-fit: contain; }
+    .icon-wrapper { display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* ===== ИКОНКИ ===== */
-    .icon-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .icon-wrapper {
+    #view-upgrader {
+      font-family: 'Rajdhani', 'Barlow Condensed', sans-serif;
+      --csgo-panel-bg-strong: rgba(6, 9, 13, .97);
+      --csgo-border: rgba(180, 156, 98, .42);
+      --csgo-accent: #e09428;
+      --csgo-text-muted: rgba(190, 183, 168, .72);
+      color: #d8d4cc;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
       overflow: hidden;
+    }
+    body.upgrader-mode { height: 100vh; overflow: hidden; }
+    body.upgrader-mode #view-upgrader { min-height: 0; }
+
+    #view-upgrader h1, #view-upgrader h2, #view-upgrader h3 { margin: 0; }
+    #view-upgrader button { cursor: pointer; font-family: inherit; border: none; background: transparent; color: inherit; }
+    #view-upgrader .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid rgba(160,172,188,.46);
+      background: linear-gradient(180deg, #1a2028fa, #0e1218fa);
+      color: #e4ddd0;
+      font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+      font-size: 12px; border-radius: 0;
+      transition: transform .2s ease, background .2s ease;
+    }
+    #view-upgrader .btn:hover { background: linear-gradient(180deg, #343e4aeb, #20262eeb); transform: translateY(-1px); }
+    #view-upgrader .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    #view-upgrader .btn--primary { background: linear-gradient(180deg, #e8a030, #b87018); border-color: #d48a20; color: #0c0a06; }
+    #view-upgrader .btn--primary:hover { background: linear-gradient(180deg, #f0b040, #c88020); }
+    #view-upgrader .btn--ghost { background: transparent; border-color: rgba(143,154,168,.47); color: #d1cbbe; }
+    #view-upgrader .input {
+      width: 100%; background: #06090dfc; border: 1px solid rgba(147,158,171,.48);
+      color: #e0d9cc; padding: 10px 12px; border-radius: 0; font-family: inherit; font-size: 13px;
+      margin-top: 6px; outline: none;
+    }
+    #view-upgrader .input:focus { border-color: #c79b4a9e; box-shadow: inset 0 0 0 1px #c79b4a47; }
+
+    #upgraderMain {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    #view-upgrader .upgrader-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr) 340px;
+      grid-template-rows: minmax(0, 1fr);
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+      padding: 16px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    #view-upgrader .inventory-column,
+    #view-upgrader .target-column {
+      display: flex; flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--csgo-panel-bg-strong);
+      border: 1px solid var(--csgo-border);
+    }
+    #view-upgrader .inventory-header,
+    #view-upgrader .target-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; border-bottom: 1px solid rgba(188,160,88,.3); flex-shrink: 0;
+    }
+    #view-upgrader .inventory-header h3,
+    #view-upgrader .target-header h3 {
+      font-size: 12px; text-transform: uppercase; letter-spacing: .15em;
+      color: var(--csgo-text-muted); font-weight: 700;
+    }
+    #view-upgrader .inventory-count { font-size: 11px; color: var(--csgo-accent); font-weight: 700; }
+    #view-upgrader .inventory-search, #view-upgrader .target-search {
+      padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0;
+    }
+    #view-upgrader .inventory-search input, #view-upgrader .target-search input { margin: 0; font-size: 12px; padding: 7px 10px; }
+    #view-upgrader .inventory-list, #view-upgrader .target-list {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 0;
+    }
+    #view-upgrader .inv-card, #view-upgrader .target-card {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px; background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer; transition: all .2s ease; position: relative;
+      flex-shrink: 0;
+    }
+    #view-upgrader .inv-card:hover, #view-upgrader .target-card:hover {
+      background: rgba(224,148,40,0.06); border-color: rgba(224,148,40,0.3);
+    }
+    #view-upgrader .inv-card.selected, #view-upgrader .target-card.selected {
+      border-color: var(--csgo-accent); background: rgba(224,148,40,0.1);
+      box-shadow: 0 0 12px rgba(224,148,40,0.2);
+    }
+    #view-upgrader .inv-card__thumb, #view-upgrader .target-card__thumb {
+      width: 52px; height: 40px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.3); overflow: hidden;
+    }
+    #view-upgrader .inv-card__thumb img, #view-upgrader .target-card__thumb img {
+      max-width: 100%; max-height: 100%; object-fit: contain;
+    }
+    #view-upgrader .inv-card__thumb .placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      color: rgba(138,147,168,0.4); font-size: 9px; text-transform: uppercase;
+    }
+    #view-upgrader .inv-card__info, #view-upgrader .target-card__info { flex: 1; min-width: 0; }
+    #view-upgrader .inv-card__name, #view-upgrader .target-card__name {
+      font-size: 12px; font-weight: 600; color: #e0dbd0;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #view-upgrader .inv-card__meta, #view-upgrader .target-card__meta {
+      font-size: 10px; color: var(--csgo-text-muted);
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #view-upgrader .inv-card__rarity, #view-upgrader .target-card__rarity {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    }
+
+    #view-upgrader .upgrade-column {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 0; position: relative; overflow-y: auto; padding: 8px;
+    }
+    #view-upgrader .upgrade-title {
+      font-size: 20px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--csgo-accent);
+      text-shadow: 0 0 20px rgba(224,148,40,0.4); margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    #view-upgrader .wheel-wrapper {
+      position: relative; width: 280px; height: 280px; margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    #view-upgrader .wheel-spinner {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+    #view-upgrader .wheel-svg { width: 100%; height: 100%; }
+    #view-upgrader .wheel-svg circle { fill: none; stroke-linecap: butt; }
+    #view-upgrader .wheel-bg { stroke: rgba(255,255,255,0.06); stroke-width: 18; }
+    #view-upgrader .wheel-progress { stroke: var(--csgo-accent); stroke-width: 18; transition: stroke-dasharray 0.4s ease; }
+    #view-upgrader .wheel-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      text-align: center; z-index: 5; pointer-events: none;
+    }
+    #view-upgrader .wheel-percent {
+      font-size: 40px; font-weight: 900; color: #fff; line-height: 1;
+      text-shadow: 0 0 20px rgba(224,148,40,0.3);
+    }
+    #view-upgrader .wheel-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: .2em;
+      color: var(--csgo-text-muted); margin-top: 4px;
+    }
+    #view-upgrader .wheel-pointer {
+      position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 10px solid transparent; border-right: 10px solid transparent;
+      border-top: 18px solid var(--csgo-accent);
+      filter: drop-shadow(0 0 6px rgba(224,148,40,0.8)); z-index: 6;
+      pointer-events: none;
+    }
+    #view-upgrader .slots-row {
+      display: flex; gap: 16px; width: 100%; max-width: 640px; justify-content: center;
+      flex-shrink: 0;
+    }
+    #view-upgrader .slot-box {
+      flex: 1; min-height: 100px;
+      background: rgba(255,255,255,0.02);
+      border: 2px dashed rgba(255,255,255,0.1);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 12px; transition: border-color .2s ease, background .2s ease;
+      cursor: pointer; position: relative;
+    }
+    #view-upgrader .slot-box:hover {
+      border-color: rgba(224,148,40,0.4); background: rgba(224,148,40,0.03);
+    }
+    #view-upgrader .slot-box.filled {
+      border-style: solid; border-color: rgba(224,148,40,0.3); background: rgba(224,148,40,0.05);
+    }
+    #view-upgrader .slot-box__label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: .15em;
+      color: var(--csgo-text-muted); margin-bottom: 6px;
+    }
+    #view-upgrader .slot-box__content {
+      display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;
+    }
+    #view-upgrader .slot-box__content img { max-height: 50px; max-width: 90px; object-fit: contain; }
+    #view-upgrader .slot-box__name {
+      font-size: 11px; font-weight: 600; color: #e0dbd0;
+      text-align: center; white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis; max-width: 100%;
+    }
+    #view-upgrader .slot-box__price { font-size: 10px; color: var(--csgo-accent); font-weight: 700; }
+    #view-upgrader .slot-box__placeholder { color: rgba(138,147,168,0.3); font-size: 11px; text-align: center; }
+
+    #view-upgrader .multiplier-row {
+      display: flex; gap: 6px; margin-top: 16px; flex-wrap: wrap; justify-content: center;
+      flex-shrink: 0;
+    }
+    #view-upgrader .mult-btn {
+      padding: 6px 14px; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03); color: var(--csgo-text-muted);
+      font-size: 12px; font-weight: 700; letter-spacing: .05em;
+      transition: all .2s ease; border-radius: 0;
+    }
+    #view-upgrader .mult-btn:hover {
+      border-color: rgba(224,148,40,0.4); color: #e0dbd0; background: rgba(224,148,40,0.06);
+    }
+    #view-upgrader .mult-btn.active {
+      border-color: var(--csgo-accent); color: #0c0a06;
+      background: var(--csgo-accent); box-shadow: 0 0 16px rgba(224,148,40,0.4);
+    }
+    #view-upgrader .spin-btn {
+      margin-top: 18px; width: 100%; max-width: 400px;
+      padding: 15px 24px; font-size: 16px; font-weight: 900;
+      letter-spacing: .12em; text-transform: uppercase;
+      background: linear-gradient(180deg, #e8a030, #b87018);
+      border: 1px solid #d48a20; color: #0c0a06;
+      transition: all .2s ease; border-radius: 0;
+      box-shadow: 0 4px 20px rgba(224,148,40,0.3);
+      flex-shrink: 0;
+    }
+    #view-upgrader .spin-btn:hover:not(:disabled) {
+      background: linear-gradient(180deg, #f0b040, #c88020);
+      box-shadow: 0 6px 28px rgba(224,148,40,0.45);
+      transform: translateY(-2px);
+    }
+    #view-upgrader .spin-btn:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
+
+    #view-upgrader .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(4,6,12,0.85);
+      display: grid; place-items: center; z-index: 50; backdrop-filter: blur(4px);
+    }
+    #view-upgrader .modal-card {
+      width: min(520px, 90vw); max-height: 85vh;
+      background: #080b0ffc; border: 1px solid rgba(200,172,100,.52);
+      padding: 24px; color: #e4dece;
+      box-shadow: 0 0 60px rgba(0,0,0,0.9);
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    #view-upgrader .modal-card h3 {
+      font-size: 18px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: #e8e0d2; margin: 0;
+    }
+
+    #view-upgrader .upload-screen {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex: 1; padding: 40px;
+    }
+    #view-upgrader .upload-zone {
+      width: 100%; max-width: 560px;
+      border: 2px dashed rgba(224,148,40,0.3);
+      background: rgba(224,148,40,0.02);
+      padding: 48px 32px; text-align: center; cursor: pointer;
+      transition: all .25s ease;
+    }
+    #view-upgrader .upload-zone:hover, #view-upgrader .upload-zone.drag-over {
+      border-color: var(--csgo-accent); background: rgba(224,148,40,0.06);
+    }
+    #view-upgrader .upload-zone__icon { font-size: 40px; margin-bottom: 16px; opacity: 0.6; }
+    #view-upgrader .upload-zone__title { font-size: 16px; font-weight: 700; color: #e0dbd0; margin-bottom: 8px; }
+    #view-upgrader .upload-zone__subtitle { font-size: 12px; color: var(--csgo-text-muted); }
+
+    @media (max-width: 1100px) {
+      #view-upgrader .upgrader-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        overflow-y: auto;
+      }
+      #view-upgrader .inventory-column, #view-upgrader .target-column { max-height: 320px; }
     }
   </style>
 </head>
 <body class="flex min-h-screen flex-col bg-[#0a0e14] text-[#8a93a8] antialiased">
 
-  <!-- ===== HEADER ===== -->
   <header class="sticky top-0 z-40 border-b border-[rgba(60,70,92,0.3)] bg-[rgba(10,12,16,0.92)] backdrop-blur-md">
     <div class="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4">
-      <a class="flex items-center gap-2.5 hover:opacity-80 transition-opacity shrink-0" href="#">
+      <a class="flex items-center gap-2.5 hover:opacity-80 transition-opacity shrink-0" href="#" data-nav="main" onclick="switchView('main');return false;">
         <div class="icon-wrapper flex h-8 w-8 items-center justify-center rounded-lg bg-purple/10 border border-purple/20">
           <img src="https://sun9-8.vkuserphoto.ru/s/v1/ig2/I5xmarIhHTQQBagVxHARyBHpWZagqhtYtvEFOnik54JPFeCAK0qc1MQ3RliNPMLlwLrqkfG7Ql1WBGDeG-tNS2eN.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,256x256&from=bu&u=UCsU9CqCFtG3dMDsUW1MXRfRwdukRtmt6ocKwzxXRJ4&cs=256x0" alt="ChmonyaClient" class="icon-img h-6 w-6">
         </div>
@@ -146,264 +369,1131 @@
         </div>
       </a>
       <nav class="hidden md:flex items-center gap-1">
-        <a class="btn-csgo text-sm !bg-purple/10 !border-purple/30 !text-white" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house h-4 w-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Главная</a>
-        <a class="btn-csgo text-sm" href="#news"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper h-4 w-4"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg>Новости</a>
-        <a class="btn-csgo text-sm" href="#developers"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users h-4 w-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Разработчики</a>
-        <a class="btn-csgo text-sm" href="https://drive.google.com/file/d/1s3KUeA1l0PsfL_quFgWb6xUeMcfYIrNo/view?usp=sharing" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>Скачать</a>
-        <a class="btn-csgo text-sm !border-purple/40 !text-purple hover:!bg-purple/10" href="https://dalink.to/s1veexz" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart h-4 w-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Donation Alerts</a>
+        <a class="btn-csgo text-sm nav-item" data-nav="main" href="#" onclick="switchView('main');return false;">Главная</a>
+        <a class="btn-csgo text-sm nav-item" data-nav="main" href="#news" onclick="switchView('main');setTimeout(()=>document.getElementById('news').scrollIntoView({behavior:'smooth'}),50);return false;">Новости</a>
+        <a class="btn-csgo text-sm nav-item" data-nav="main" href="#developers" onclick="switchView('main');setTimeout(()=>document.getElementById('developers').scrollIntoView({behavior:'smooth'}),50);return false;">Разработчики</a>
+        <a class="btn-csgo text-sm nav-item" data-nav="upgrader" href="#" onclick="switchView('upgrader');return false;" id="navUpgrader">🎰 Апгрейдер</a>
+        <a class="btn-csgo text-sm" href="https://drive.google.com/file/d/1nQSueV76iBjbRchIWeIVzi1vpu2tA4Dv/view?usp=drive_link" target="_blank">Скачать</a>
+        <a class="btn-csgo text-sm !border-purple/40 !text-purple hover:!bg-purple/10" href="https://dalink.to/s1veexz" target="_blank">Donation</a>
       </nav>
     </div>
   </header>
 
-  <main class="flex-1">
-
-    <!-- ===== HERO ===== -->
-    <section class="relative overflow-hidden hero-bg">
-      <div class="hero-overlay absolute inset-0"></div>
-      <div class="pointer-events-none absolute inset-0">
-        <div class="absolute top-0 left-1/3 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-purple/5 blur-[120px]"></div>
-        <div class="absolute bottom-0 right-1/3 h-[400px] w-[400px] translate-y-1/2 rounded-full bg-purple/5 blur-[100px]"></div>
-      </div>
-      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:py-28 lg:py-36">
-        <div class="flex flex-col items-center text-center animate-on-scroll visible" style="transition-delay: 0ms;">
-          <div class="hero-icon mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-purple/10 border border-purple/20 shadow-lg shadow-purple/10 glow-purple overflow-hidden">
-            <img src="https://images.cybersport.ru/images/quote-author/plain/f0/f0f4eca4-b2dd-448e-815c-05c684d420f9.png" alt="ChmonyaClient" class="h-16 w-16 object-contain">
-          </div>
-          <h1 class="mb-4 text-5xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight">
-            Chmonya <span class="gradient-text">Client</span>
-          </h1>
-          <p class="mb-3 text-lg sm:text-xl text-[#8a93a8] font-bold uppercase tracking-[0.2em]">Ностальгический мод для CS:GO</p>
-          <p class="mb-8 max-w-2xl text-sm sm:text-base text-[#8a93a8]/70 leading-relaxed">Верните легендарную атмосферу культового шутера. Наш эмулятор полностью воспроизводит сетевую инфраструктуру CS:GO — от поиска соперников до системы прогрессии. Наслаждайтесь классическим геймплеем, участвуйте в операциях, получайте награды и погружайтесь в ностальгию по тем временам, когда CS:GO была на пике популярности.</p>
-          <div class="flex flex-wrap items-center justify-center gap-3">
-            <a class="btn-csgo btn-csgo-primary px-8 py-3.5 text-sm font-bold uppercase tracking-wide flex items-center gap-2 rounded-xl" href="https://drive.google.com/file/d/1s3KUeA1l0PsfL_quFgWb6xUeMcfYIrNo/view?usp=sharing" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>Скачать клиент</a>
-            <a class="btn-csgo px-6 py-3.5 text-sm font-bold uppercase tracking-wide flex items-center gap-2 !border-purple/40 !text-purple hover:!bg-purple/10 rounded-xl" href="https://dalink.to/s1veexz" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart h-4 w-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Поддержать</a>
-          </div>
-          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <a class="btn-csgo text-sm !border-[#0088cc]/40 !text-[#0088cc] hover:!bg-[#0088cc]/10 rounded-xl" href="https://t.me/chmonyasq" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send h-4 w-4"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg>Telegram
-            </a>
-            <a class="btn-csgo text-sm !border-[#5865F2]/40 !text-[#5865F2] hover:!bg-[#5865F2]/10 rounded-xl" href="https://discord.gg/zw2xXehDBJ" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle h-4 w-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discord
-            </a>
+  <div id="view-main" class="flex-1">
+    <main class="flex-1">
+      <section class="relative overflow-hidden hero-bg">
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="pointer-events-none absolute inset-0">
+          <div class="absolute top-0 left-1/3 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-purple/5 blur-[120px]"></div>
+          <div class="absolute bottom-0 right-1/3 h-[400px] w-[400px] translate-y-1/2 rounded-full bg-purple/5 blur-[100px]"></div>
+        </div>
+        <div class="relative mx-auto max-w-7xl px-4 py-20 sm:py-28 lg:py-36">
+          <div class="flex flex-col items-center text-center animate-on-scroll visible">
+            <div class="mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-purple/10 border border-purple/20 shadow-lg glow-purple overflow-hidden">
+              <img src="https://images.cybersport.ru/images/quote-author/plain/f0/f0f4eca4-b2dd-448e-815c-05c684d420f9.png" alt="ChmonyaClient" class="h-16 w-16 object-contain">
+            </div>
+            <h1 class="mb-4 text-5xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight">
+              Chmonya <span class="gradient-text">Client</span>
+            </h1>
+            <p class="mb-3 text-lg sm:text-xl text-[#8a93a8] font-bold uppercase tracking-[0.2em]">Ностальгический мод для CS:GO</p>
+            <p class="mb-8 max-w-2xl text-sm sm:text-base text-[#8a93a8]/70 leading-relaxed">Верните легендарную атмосферу культового шутера. Наш эмулятор полностью воспроизводит сетевую инфраструктуру CS:GO — от поиска соперников до системы прогрессии.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <a class="btn-csgo btn-csgo-primary px-8 py-3.5 text-sm font-bold uppercase tracking-wide flex items-center gap-2 rounded-xl" href="https://drive.google.com/file/d/1nQSueV76iBjbRchIWeIVzi1vpu2tA4Dv/view?usp=drive_link" target="_blank">Скачать клиент</a>
+              <button class="btn-csgo px-6 py-3.5 text-sm font-bold uppercase tracking-wide flex items-center gap-2 !border-purple/40 !text-purple hover:!bg-purple/10 rounded-xl" onclick="switchView('upgrader')">🎰 Апгрейдер скинов</button>
+            </div>
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a class="btn-csgo text-sm !border-[#0088cc]/40 !text-[#0088cc] hover:!bg-[#0088cc]/10 rounded-xl" href="https://t.me/chmonyasq" target="_blank">Telegram</a>
+              <a class="btn-csgo text-sm !border-[#5865F2]/40 !text-[#5865F2] hover:!bg-[#5865F2]/10 rounded-xl" href="https://discord.gg/zw2xXehDBJ" target="_blank">Discord</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== НОВОСТИ ===== -->
-    <section id="news" class="border-b border-white/5 bg-[#0d1018]/50 py-16">
-      <div class="mx-auto max-w-7xl px-4">
-        <div class="mb-8 flex items-center gap-3 animate-on-scroll">
-          <span class="h-6 w-1 bg-purple rounded-full"></span>
-          <h2 class="text-xl font-black uppercase italic tracking-wide text-white">Последние новости</h2>
-          <a class="ml-auto flex items-center gap-1 text-xs uppercase tracking-widest text-purple hover:text-purple/80 transition-colors" href="#newsContainer">Все новости →</a>
+      <section id="news" class="border-b border-white/5 bg-[#0d1018]/50 py-16">
+        <div class="mx-auto max-w-7xl px-4">
+          <div class="mb-8 flex items-center gap-3 animate-on-scroll">
+            <span class="h-6 w-1 bg-purple rounded-full"></span>
+            <h2 class="text-xl font-black uppercase italic tracking-wide text-white">Последние новости</h2>
+          </div>
+          <div id="newsContainer" class="grid gap-6 sm:grid-cols-2"></div>
         </div>
-        <div id="newsContainer" class="grid gap-6 sm:grid-cols-2"></div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== РАЗРАБОТЧИКИ (без иконок) ===== -->
-    <section id="developers" class="border-b border-white/5 bg-[#0a0d12] py-20 sm:py-24">
-      <div class="mx-auto max-w-7xl px-4">
+      <section id="developers" class="border-b border-white/5 bg-[#0a0d12] py-20 sm:py-24">
+        <div class="mx-auto max-w-7xl px-4">
+          <div class="mb-14 text-center animate-on-scroll">
+            <div class="inline-flex items-center gap-2 bg-purple/10 border border-purple/20 rounded-full px-4 py-1.5 mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-purple">👨‍💻 команда</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Разработчики <span class="gradient-text">проекта</span></h2>
+            <p class="mt-3 text-sm text-[#8a93a8] max-w-xl mx-auto">Люди, которые вернули легенду к жизни и продолжают поддерживать её</p>
+          </div>
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-6 text-center card-hover animate-on-scroll delay-100">
+              <div class="mx-auto mb-5 h-20 w-20 rounded-full bg-purple/10 border border-purple/20 flex items-center justify-center overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 text-purple"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-purple transition-colors">Chmonya</h3>
+              <p class="text-xs font-bold uppercase tracking-wider text-purple mb-3">Основатель</p>
+              <p class="text-sm text-[#8a93a8]/70 leading-relaxed">Идейный вдохновитель, создатель большей части проекта, отвечает за сервера</p>
+            </div>
+            <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-6 text-center card-hover animate-on-scroll delay-200">
+              <div class="mx-auto mb-5 h-20 w-20 rounded-full bg-purple/10 border border-purple/20 flex items-center justify-center overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 text-purple"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-purple transition-colors">No_spam</h3>
+              <p class="text-xs font-bold uppercase tracking-wider text-purple mb-3">Второй разработчик</p>
+              <p class="text-sm text-[#8a93a8]/70 leading-relaxed">Создатель матчмейкинга, помог с сайтом и проектом в целом</p>
+            </div>
+            <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-6 text-center card-hover animate-on-scroll delay-300">
+              <div class="mx-auto mb-5 h-20 w-20 rounded-full bg-purple/10 border border-purple/20 flex items-center justify-center overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 text-purple"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-purple transition-colors">Danger_tea</h3>
+              <p class="text-xs font-bold uppercase tracking-wider text-purple mb-3">UI/UX Дизайнер</p>
+              <p class="text-sm text-[#8a93a8]/70 leading-relaxed">Операция взята из его мода, а затем доработана</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-7xl px-4 py-20 sm:py-24">
         <div class="mb-14 text-center animate-on-scroll">
           <div class="inline-flex items-center gap-2 bg-purple/10 border border-purple/20 rounded-full px-4 py-1.5 mb-4">
-            <span class="text-xs font-bold uppercase tracking-wider text-purple">👨‍💻 команда</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-purple">⚡ возможности</span>
           </div>
-          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Разработчики <span class="gradient-text">проекта</span></h2>
-          <p class="mt-3 text-sm text-[#8a93a8] max-w-xl mx-auto">Люди, которые вернули легенду к жизни и продолжают поддерживать её</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Всё для <span class="gradient-text">идеальной игры</span></h2>
+          <p class="mt-3 text-sm text-[#8a93a8] max-w-xl mx-auto">Все необходимые инструменты для возрождения оригинального игрового опыта</p>
         </div>
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-6 text-center card-hover animate-on-scroll delay-100">
-            <div class="mx-auto mb-5 h-20 w-20 rounded-full bg-purple/10 border border-purple/20 flex items-center justify-center overflow-hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-10 w-10 text-purple"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-100">
+            <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Матчмейкинг</h3>
+            <p class="text-sm text-[#8a93a8] leading-relaxed">Оригинальный 5v5 матчмейкинг. Competitive, Wingman, Danger Zone и все классические режимы.</p>
+          </div>
+          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-200">
+            <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Инвентарь и дропы</h3>
+            <p class="text-sm text-[#8a93a8] leading-relaxed">Зарабатывайте скины, кейсы и граффити после матчей. Prime статус открывает доступ к ранговым играм.</p>
+          </div>
+          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-300">
+            <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Операции и награды</h3>
+            <p class="text-sm text-[#8a93a8] leading-relaxed">Участвуйте в операциях, выполняйте миссии и получайте эксклюзивные награды: агентов, скины, наклейки и нашивки.</p>
+          </div>
+          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-100">
+            <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Расширенные настройки</h3>
+            <p class="text-sm text-[#8a93a8] leading-relaxed">Кастомизация меню и другие параметры для тонкой настройки игры.</p>
+          </div>
+          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-200">
+            <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Внутриигровой магазин</h3>
+            <p class="text-sm text-[#8a93a8] leading-relaxed">Уникальный магазин с предметами, скинами и пропусками для разнообразия геймплея.</p>
+          </div>
+          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-300">
+            <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Ностальгический опыт</h3>
+            <p class="text-sm text-[#8a93a8] leading-relaxed">Полное погружение в атмосферу CS:GO образца 2021 и 2019 года. Классический геймплей.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-t border-white/5 bg-[#0d1018]">
+        <div class="mx-auto max-w-7xl px-4 py-20 sm:py-24">
+          <div class="mb-14 text-center animate-on-scroll">
+            <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Как начать <span class="gradient-text">играть?</span></h2>
+            <p class="mt-3 text-sm text-[#8a93a8]">Три простых шага до первого матча</p>
+          </div>
+          <div class="grid gap-6 sm:grid-cols-3">
+            <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-100">
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg">1</div>
+              <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Скачайте CS:GO</h3>
+              <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Откройте страницу CS:GO в Steam Store (App ID: 4465480) и добавьте в библиотеку.</p>
+              <a href="https://store.steampowered.com/app/4465480/CounterStrikeGlobal_Offensive/" target="_blank" class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-purple/30 bg-purple/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple hover:bg-purple/10 transition-colors">Steam Store →</a>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-purple transition-colors">Chmonya</h3>
-            <p class="text-xs font-bold uppercase tracking-wider text-purple mb-3">Основатель</p>
-            <p class="text-sm text-[#8a93a8]/70 leading-relaxed">Идейный вдохновитель, создатель большей части проекта, отвечает за сервера</p>
-          </div>
-          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-6 text-center card-hover animate-on-scroll delay-200">
-            <div class="mx-auto mb-5 h-20 w-20 rounded-full bg-purple/10 border border-purple/20 flex items-center justify-center overflow-hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code h-10 w-10 text-purple"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-200">
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg">2</div>
+              <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Скачайте клиент</h3>
+              <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Загрузите архив с модом с нашего сайта и распакуйте его в любую папку.</p>
+              <a href="https://drive.google.com/file/d/1nQSueV76iBjbRchIWeIVzi1vpu2tA4Dv/view?usp=drive_link" target="_blank" class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-purple/30 bg-purple/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple hover:bg-purple/10 transition-colors">Скачать мод →</a>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-purple transition-colors">No_spam</h3>
-            <p class="text-xs font-bold uppercase tracking-wider text-purple mb-3">Второй разработчик</p>
-            <p class="text-sm text-[#8a93a8]/70 leading-relaxed">Создатель матчмейкинга, помог с сайтом и проектом в целом</p>
-          </div>
-          <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-6 text-center card-hover animate-on-scroll delay-300">
-            <div class="mx-auto mb-5 h-20 w-20 rounded-full bg-purple/10 border border-purple/20 flex items-center justify-center overflow-hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette h-10 w-10 text-purple"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-300">
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg">3</div>
+              <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Установите мод</h3>
+              <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Скопируйте содержимое архива в папку с CS:GO и замените файлы. Готово!</p>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-purple transition-colors">Danger_tea</h3>
-            <p class="text-xs font-bold uppercase tracking-wider text-purple mb-3">UI/UX Дизайнер</p>
-            <p class="text-sm text-[#8a93a8]/70 leading-relaxed">Операция взята из его мода, а затем доработана</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="view-upgrader" style="display:none;">
+    <div id="upgraderUploadScreen" class="upload-screen">
+      <div class="upload-zone" id="upgraderUploadZone">
+        <input type="file" id="upgraderFileInput" accept=".txt,.cfg,.vdf" style="display:none;">
+        <div class="upload-zone__icon">📁</div>
+        <div class="upload-zone__title">Перетащите inventory.txt сюда</div>
+        <div class="upload-zone__subtitle">или нажмите, чтобы выбрать файл</div>
+      </div>
+    </div>
+
+    <div id="upgraderMain" style="display:none;">
+      <div class="upgrader-layout">
+        <div class="inventory-column">
+          <div class="inventory-header">
+            <h3>Ваш инвентарь</h3>
+            <span class="inventory-count" id="upgraderInvCount">0</span>
+          </div>
+          <div class="inventory-search">
+            <input type="text" id="invSearchInput" class="input" placeholder="Поиск...">
+          </div>
+          <div class="inventory-list" id="upgraderInvList"></div>
+        </div>
+
+        <div class="upgrade-column">
+          <div class="upgrade-title">🎰 Upgrader</div>
+          <div class="wheel-wrapper">
+            <div class="wheel-pointer"></div>
+            <div class="wheel-spinner" id="wheelSpinner">
+              <svg class="wheel-svg" viewBox="0 0 200 200">
+                <circle class="wheel-bg" cx="100" cy="100" r="88"></circle>
+                <circle class="wheel-progress" id="wheelProgress" cx="100" cy="100" r="88"
+                        transform="rotate(-90 100 100)" stroke-dasharray="0 552.92"></circle>
+              </svg>
+            </div>
+            <div class="wheel-center">
+              <div class="wheel-percent" id="wheelPercent">50%</div>
+              <div class="wheel-label">шанс</div>
+            </div>
+          </div>
+
+          <div class="slots-row">
+            <div class="slot-box" id="sourceSlot" onclick="openSourcePicker()">
+              <div class="slot-box__label">Выберите предмет</div>
+              <div class="slot-box__content" id="sourceSlotContent">
+                <div class="slot-box__placeholder">Нажмите, чтобы выбрать</div>
+              </div>
+            </div>
+            <div class="slot-box" id="targetSlot" onclick="openTargetPicker()">
+              <div class="slot-box__label">Целевой предмет</div>
+              <div class="slot-box__content" id="targetSlotContent">
+                <div class="slot-box__placeholder">Нажмите, чтобы выбрать</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="multiplier-row" id="multiplierRow">
+            <button class="mult-btn active" data-mult="2">x2</button>
+            <button class="mult-btn" data-mult="4">x4</button>
+            <button class="mult-btn" data-mult="8">x8</button>
+            <button class="mult-btn" data-mult="16">x16</button>
+            <button class="mult-btn" data-mult="32">x32</button>
+            <button class="mult-btn" data-mult="64">x64</button>
+          </div>
+
+          <button class="spin-btn" id="spinBtn" disabled>⚡ Прокачать</button>
+        </div>
+
+        <div class="target-column">
+          <div class="target-header">
+            <h3>Библиотека</h3>
+            <span id="libraryStatus" style="font-size:10px;color:var(--csgo-text-muted);"></span>
+          </div>
+          <div class="target-search">
+            <input type="text" id="targetSearchInput" class="input" placeholder="Поиск скина / наклейки...">
+          </div>
+          <div class="target-list" id="targetList"></div>
+          <div style="padding:8px;border-top:1px solid rgba(188,160,88,.3);flex-shrink:0;">
+            <button class="btn btn--ghost" style="width:100%;" onclick="saveInventory()">💾 Сохранить inventory.txt</button>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ===== ОСОБЕННОСТИ (без иконок) ===== -->
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:py-24">
-      <div class="mb-14 text-center animate-on-scroll">
-        <div class="inline-flex items-center gap-2 bg-purple/10 border border-purple/20 rounded-full px-4 py-1.5 mb-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-purple">⚡ возможности</span>
-        </div>
-        <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Всё для <span class="gradient-text">идеальной игры</span></h2>
-        <p class="mt-3 text-sm text-[#8a93a8] max-w-xl mx-auto">Все необходимые инструменты для возрождения оригинального игрового опыта</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-100">
-          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-purple/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swords h-5 w-5 text-purple"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" x2="9" y1="14" y2="18"/><line x1="7" x2="4" y1="17" y2="20"/><line x1="3" x2="5" y1="19" y2="21"/></svg>
-          </div>
-          <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Матчмейкинг</h3>
-          <p class="text-sm text-[#8a93a8] leading-relaxed">Оригинальный 5v5 матчмейкинг. Competitive, Wingman, Danger Zone и все классические режимы.</p>
-        </div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-200">
-          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-purple/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package h-5 w-5 text-purple"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
-          </div>
-          <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Инвентарь и дропы</h3>
-          <p class="text-sm text-[#8a93a8] leading-relaxed">Зарабатывайте скины, кейсы и граффити после матчей. Prime статус открывает доступ к ранговым играм.</p>
-        </div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-300">
-          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-purple/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown h-5 w-5 text-purple"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
-          </div>
-          <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Операции и награды</h3>
-          <p class="text-sm text-[#8a93a8] leading-relaxed">Участвуйте в операциях, выполняйте миссии и получайте эксклюзивные награды: агентов, скины, наклейки и нашивки.</p>
-        </div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-100">
-          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-purple/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders h-5 w-5 text-purple"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="12" y2="12"/><line x1="18" x2="22" y1="16" y2="16"/></svg>
-          </div>
-          <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Расширенные настройки</h3>
-          <p class="text-sm text-[#8a93a8] leading-relaxed">Кастомизация меню и другие параметры для тонкой настройки игры.</p>
-        </div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-200">
-          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-purple/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-store h-5 w-5 text-purple"><path d="M2 3h20v3H2z"/><path d="M4 6v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6"/><path d="M10 10h4"/><path d="M12 10v4"/></svg>
-          </div>
-          <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Внутриигровой магазин</h3>
-          <p class="text-sm text-[#8a93a8] leading-relaxed">Уникальный магазин с предметами, скинами и пропусками для разнообразия геймплея.</p>
-        </div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-300">
-          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/5 bg-purple/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-5 w-5 text-purple"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Ностальгический опыт</h3>
-          <p class="text-sm text-[#8a93a8] leading-relaxed">Полное погружение в атмосферу CS:GO образца 2021 и 2019 года. Классический геймплей.</p>
-        </div>
-      </div>
-    </section>
+  <div id="sourceModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card" style="max-width:600px;">
+      <h3>Выберите предмет для апгрейда</h3>
+      <input type="text" id="sourceModalSearch" class="input" placeholder="Поиск...">
+      <div id="sourceModalList" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;"></div>
+      <button class="btn btn--ghost" onclick="closeSourceModal()">Закрыть</button>
+    </div>
+  </div>
 
-    <!-- ===== КАК НАЧАТЬ ===== -->
-    <section class="border-t border-white/5 bg-[#0d1018]">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:py-24">
-        <div class="mb-14 text-center animate-on-scroll">
-          <div class="inline-flex items-center gap-2 bg-purple/10 border border-purple/20 rounded-full px-4 py-1.5 mb-4">
-            <span class="text-xs font-bold uppercase tracking-wider text-purple">🚀 старт</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Как начать <span class="gradient-text">играть?</span></h2>
-          <p class="mt-3 text-sm text-[#8a93a8]">Три простых шага до первого матча в любимой игре</p>
-        </div>
-        <div class="grid gap-6 sm:grid-cols-3">
-          <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-100">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg shadow-purple/30">1</div>
-            <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Скачайте CS:GO</h3>
-            <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Откройте страницу CS:GO в Steam Store (App ID: 4465480) и добавьте в библиотеку.</p>
-            <a href="https://store.steampowered.com/app/4465480/CounterStrikeGlobal_Offensive/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-purple/30 bg-purple/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple hover:bg-purple/10 transition-colors">Steam Store →</a>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-200">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg shadow-purple/30">2</div>
-            <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Скачайте клиент</h3>
-            <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Загрузите архив с модом с нашего сайта и распакуйте его в любую папку.</p>
-            <a href="https://drive.google.com/file/d/1s3KUeA1l0PsfL_quFgWb6xUeMcfYIrNo/view?usp=sharing" target="_blank" class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-purple/30 bg-purple/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple hover:bg-purple/10 transition-colors">Скачать мод →</a>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-300">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg shadow-purple/30">3</div>
-            <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Установите мод</h3>
-            <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Скопируйте содержимое архива в папку с CS:GO и замените файлы. Готово!</p>
-          </div>
-        </div>
-      </div>
-    </section>
+  <div id="resultModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card" style="max-width:420px;text-align:center;">
+      <div id="resultModalContent"></div>
+    </div>
+  </div>
 
-  </main>
+  <div id="toastContainer" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;display:flex;flex-direction:column;gap:8px;align-items:center;"></div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="mt-auto border-t border-[rgba(60,70,92,0.3)] bg-[rgba(10,12,16,0.95)] backdrop-blur-sm">
     <div class="border-b border-white/5 bg-[#0a0d12]">
       <div class="mx-auto flex max-w-7xl items-start gap-2.5 px-4 py-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert mt-0.5 h-3.5 w-3.5 shrink-0 text-purple/60"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-        <p class="text-[11px] leading-relaxed text-purple/40">ChmonyaClient — фанатский проект для последней официальной версии Counter-Strike: Global Offensive (App ID: 4465480), поддерживаемый добровольными пожертвованиями игроков. Проект не связан с Valve Corporation. Все авторские права и товарные знаки принадлежат Valve Corporation.</p>
+        <p class="text-[11px] leading-relaxed text-purple/40">ChmonyaClient — фанатский проект для последней официальной версии Counter-Strike: Global Offensive (App ID: 4465480), поддерживаемый добровольными пожертвованиями игроков. Проект не связан с Valve Corporation.</p>
       </div>
     </div>
     <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex items-center gap-3 text-xs text-[#8a93a8]">
-        <div class="icon-wrapper flex h-3.5 w-3.5 items-center justify-center overflow-hidden">
-          <img src="https://sun9-8.vkuserphoto.ru/s/v1/ig2/I5xmarIhHTQQBagVxHARyBHpWZagqhtYtvEFOnik54JPFeCAK0qc1MQ3RliNPMLlwLrqkfG7Ql1WBGDeG-tNS2eN.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,256x256&from=bu&u=UCsU9CqCFtG3dMDsUW1MXRfRwdukRtmt6ocKwzxXRJ4&cs=256x0" alt="ChmonyaClient" class="icon-img h-3.5 w-3.5">
-        </div>
         <span class="font-bold uppercase tracking-wider text-white">Chmonya<span class="text-purple">Client</span></span>
         <span class="text-white/20">|</span>
-        <span class="hidden sm:inline text-[#8a93a8]/60">CS:GO Legacy</span>
+        <span class="text-[#8a93a8]/60">CS:GO Legacy</span>
       </div>
       <nav class="flex items-center gap-4 text-[11px] text-[#8a93a8]/60">
-        <a class="hover:text-purple transition-colors" href="#">Главная</a>
-        <a class="hover:text-purple transition-colors" href="#news">Новости</a>
-        <a class="hover:text-purple transition-colors" href="#developers">Разработчики</a>
-        <a class="hover:text-purple transition-colors" href="https://dalink.to/s1veexz" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart h-3 w-3 inline"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Donation Alerts</a>
+        <a class="hover:text-purple transition-colors" href="#" onclick="switchView('main');return false;">Главная</a>
+        <a class="hover:text-purple transition-colors" href="#news" onclick="switchView('main');setTimeout(()=>document.getElementById('news').scrollIntoView({behavior:'smooth'}),50);return false;">Новости</a>
+        <a class="hover:text-purple transition-colors" href="#developers" onclick="switchView('main');setTimeout(()=>document.getElementById('developers').scrollIntoView({behavior:'smooth'}),50);return false;">Разработчики</a>
+        <a class="hover:text-purple transition-colors" href="https://dalink.to/s1veexz" target="_blank">Donation Alerts</a>
       </nav>
       <div class="text-xs text-[#8a93a8]/40">© 2026 ChmonyaClient</div>
     </div>
   </footer>
 
   <script>
-    // ===== НОВОСТИ =====
-    const newsData = [
-      {
-        headline: "Запретная Зона расширяется!",
-        body: "Эксперимент развивается. Чтобы остаться в живых до конца, вам придется испытать свои навыки — с новыми картами и вещами, например респавнами, экзо-прыгами и толчковыми минами!",
-        tag: "обновление",
-        image: "https://clan.steamstatic.com/images/3381077/80621b2b2efdb8e77fefcf7689fd03dd5003782f.png",
-        url: "https://store.steampowered.com/news/app/730"
-      },
-      {
-        headline: "Операция «Хищные Воды»",
-        body: "Представляем операцию «Хищные воды», в которую входят новые карты, новые миссии и новые способы игры в ваших любимых режимах! Активируйте пропуск на операцию и выполняйте миссии, чтобы получать награды, в числе которых новые агенты, коллекции оружия, наклейки и нашивки.",
-        tag: "обновление",
-        image: "https://images.steamusercontent.com/ugc/4122474773860967943/56E309B41788AA9E886F768D984286DBEA241198/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
-        url: "https://store.steampowered.com/news/app/730"
-      }
+    const API_MIRRORS = [
+      'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en',
+      'https://cdn.statically.io/gh/ByMykel/CSGO-API/main/public/api/en',
     ];
 
-    function renderNews(item) {
-      return `
-        <div class="rounded-xl border border-white/5 bg-[#0f141b] overflow-hidden card-hover animate-on-scroll">
-          <img src="${item.image}" alt="${item.headline}" class="news-img" loading="lazy">
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs font-bold uppercase tracking-wider text-purple bg-purple/10 px-3 py-1 rounded-full border border-purple/20">${item.tag}</span>
-              <span class="text-xs text-[#8a93a8]/40">${new Date().toLocaleDateString('ru-RU')}</span>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-1.5">${item.headline}</h3>
-            <p class="text-sm text-[#8a93a8]/70 leading-relaxed mb-4">${item.body}</p>
-            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-purple hover:text-purple/80 transition-colors">
-              Читать далее
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-3.5 w-3.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      `;
+    const STICKER_ITEM_DEF_INDEX = '1209';
+    const STICKER_KIT_ATTR = '113';
+
+    let WEAPONS = [];
+    let SKINS = [];
+    let STICKERS = [];
+    let SKINS_LOADED = false;
+    let SKINS_LOADING = false;
+
+    const RARITY_COLORS = {
+      "Consumer Grade": "#b0c3d9", "Industrial Grade": "#5e98d9", "Mil-Spec Grade": "#4b69ff",
+      "Restricted": "#8847ff", "Classified": "#d32ce6", "Covert": "#eb4b4b",
+      "Contraband": "#e4ae39", "Extraordinary": "#eb4b4b",
+      "Distinguished": "#4b69ff", "Exceptional": "#8847ff", "Superior": "#d32ce6", "Master": "#eb4b4b",
+      "High Grade": "#4b69ff", "Remarkable": "#8847ff", "Exotic": "#d32ce6"
+    };
+
+    const RARITY_SCORE = {
+      'Consumer Grade': 1,
+      'Industrial Grade': 2,
+      'Mil-Spec Grade': 4,
+      'Restricted': 8,
+      'Classified': 16,
+      'Covert': 32,
+      'Contraband': 64,
+      'Extraordinary': 64,
+      'Distinguished': 4,
+      'Exceptional': 8,
+      'Superior': 16,
+      'Master': 32,
+      'High Grade': 4,
+      'Remarkable': 8,
+      'Exotic': 16,
+    };
+
+    const WEAPON_FACTOR = {
+      500: 5.0, 503: 5.0, 505: 5.0, 506: 5.0, 507: 5.0, 508: 5.0,
+      509: 5.0, 512: 5.0, 514: 5.0, 515: 5.0, 516: 5.0, 519: 5.0,
+      520: 5.0, 521: 5.0, 522: 5.0, 523: 5.0, 525: 5.0, 526: 5.0,
+      5027: 4.0, 5028: 4.0, 5029: 4.0, 5030: 4.0, 5031: 4.0, 5032: 4.0, 5033: 4.0,
+      9: 3.0,
+      7: 2.5,
+      16: 2.0, 60: 2.0,
+      1: 1.8,
+      61: 1.5, 4: 1.5,
+      8: 1.3, 10: 1.3, 13: 1.3, 39: 1.3, 40: 1.3, 11: 1.2, 38: 1.2,
+      17: 1.0, 19: 1.0, 23: 1.0, 24: 1.0, 26: 1.0, 33: 1.0, 34: 1.0,
+      3: 1.0, 30: 1.0, 63: 1.0,
+      2: 0.9, 32: 0.9, 36: 0.9, 64: 0.9, 25: 0.9, 27: 0.9, 35: 0.9,
+      29: 0.8,
+      14: 0.7, 28: 0.7,
+    };
+    function weaponFactor(defIndex) { return WEAPON_FACTOR[Number(defIndex)] || 1; }
+
+    const RARITY_BY_ID = { "1": "Consumer Grade", "2": "Industrial Grade", "3": "Mil-Spec Grade", "4": "Restricted", "5": "Classified", "6": "Covert", "7": "Contraband" };
+
+    function normalizeRarity(name) {
+      if (!name) return 'Consumer Grade';
+      return RARITY_COLORS[name] ? name : 'Consumer Grade';
+    }
+    function rarityScore(rarityName) { return RARITY_SCORE[rarityName] || 1; }
+
+    // Оценка наклейки по названию — турнирные Holo/Foil/Gold весят гораздо больше
+    function stickerValue(sticker) {
+      const name = (sticker.name || '').toLowerCase();
+      let base = rarityScore(sticker.rarity) || 4;
+      const isTournament = /katowice|cologne|dreamhack|columbus|mlg|atlanta|krakow|boston|london|berlin|stockholm|antwerp|rio|paris|copenhagen|shanghai|austin|budapest|major/i.test(name);
+      const isHolo = /holo/i.test(name);
+      const isFoil = /foil/i.test(name);
+      const isGold = /gold/i.test(name);
+      const isSouvenir = /souvenir/i.test(name);
+      const isPaper = /paper/i.test(name);
+
+      if (isTournament) base *= 8;
+      if (isHolo) base *= 3;
+      if (isFoil) base *= 4;
+      if (isGold) base *= 5;
+      if (isSouvenir) base *= 2;
+      if (isTournament && isPaper) base *= 1.5;
+      return base;
     }
 
-    document.getElementById('newsContainer').innerHTML = newsData.map(renderNews).join('');
+    // Общая оценка предмета (скин / наклейка)
+    function itemValue(item) {
+      if (!item) return 1;
+      if (item.type === 'sticker') return stickerValue(item);
+      return rarityScore(item.rarity) * weaponFactor(item.def_index);
+    }
 
-    // ===== АНИМАЦИИ =====
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -10% 0px',
-      threshold: 0.15
+    async function fetchJSON(url) {
+      const r = await fetch(url, { cache: 'force-cache' });
+      if (!r.ok) throw new Error(`${r.status} ${r.statusText} · ${url}`);
+      return r.json();
+    }
+
+    async function loadFromMirror(base) {
+      const [weapons, skins, knives, stickers] = await Promise.all([
+        fetchJSON(`${base}/base_weapons.json`),
+        fetchJSON(`${base}/skins_not_grouped.json`),
+        fetchJSON(`${base}/skins.json`),
+        fetchJSON(`${base}/stickers.json`),
+      ]);
+
+      WEAPONS = weapons
+        .map(w => ({
+          id: String(w.def_index ?? w.id ?? '0'),
+          name: w.name || ('Weapon ' + (w.def_index ?? w.id)),
+        }))
+        .filter(w => w.id !== '0');
+
+      const all = Array.isArray(skins) ? [...skins] : [];
+      const knivesArr = Array.isArray(knives) ? knives : Object.values(knives || {});
+      knivesArr.forEach(item => {
+        if (item && item.weapon && item.weapon.weapon_id) all.push(item);
+      });
+
+      const seen = new Set();
+      const skinList = all
+        .filter(s => s && s.paint_index && s.image && s.name)
+        .map(s => {
+          const defIndex = String(s.weapon?.weapon_id ?? s.weapon_id ?? '0');
+          return {
+            type: 'skin',
+            id: `${defIndex}-${s.paint_index}`,
+            name: s.name,
+            def_index: defIndex,
+            paint_index: String(s.paint_index),
+            rarity: normalizeRarity(s.rarity?.name),
+            image: s.image,
+          };
+        })
+        .filter(s => {
+          if (seen.has(s.id)) return false;
+          seen.add(s.id);
+          return true;
+        });
+
+      const stickerArr = Array.isArray(stickers) ? stickers : Object.values(stickers || {});
+      STICKERS = stickerArr
+        .filter(s => s && s.name && s.image)
+        .map(s => {
+          const stickerIndex = String(s.id ?? '').replace(/^sticker-/, '');
+          if (!stickerIndex || !/^\d+$/.test(stickerIndex)) return null;
+          return {
+            type: 'sticker',
+            id: 'sticker-' + stickerIndex,
+            sticker_index: stickerIndex,
+            name: s.name,
+            def_index: STICKER_ITEM_DEF_INDEX,
+            paint_index: stickerIndex,
+            rarity: normalizeRarity(s.rarity?.name),
+            image: s.image,
+          };
+        })
+        .filter(Boolean);
+
+      SKINS = [...skinList, ...STICKERS];
+      console.log(`[Апгрейдер] Скинов: ${skinList.length}, наклеек: ${STICKERS.length}, оружия: ${WEAPONS.length}`);
+    }
+
+    async function loadSkinsLibrary() {
+      if (SKINS_LOADED || SKINS_LOADING) return;
+      SKINS_LOADING = true;
+      const status = document.getElementById('libraryStatus');
+      if (status) status.textContent = 'загрузка...';
+      showToast('Загрузка библиотеки...');
+
+      let lastErr = null;
+      for (const base of API_MIRRORS) {
+        try {
+          console.log(`[Апгрейдер] Пробуем зеркало: ${base}`);
+          await loadFromMirror(base);
+          SKINS_LOADED = true;
+          SKINS_LOADING = false;
+          if (status) status.textContent = SKINS.length + ' шт.';
+          showToast(`Библиотека: ${SKINS.length - STICKERS.length} скинов + ${STICKERS.length} наклеек`);
+          if (state.inventorySkins.length) {
+            state.inventorySkins = state.items.map(item => {
+              const pk = (item.attributes['6'] || '').trim();
+              const skin = SKINS.find(s => s.type === 'skin' && s.paint_index === pk && s.def_index === String(item.def_index));
+              return { ...item, skin };
+            });
+            renderInventory(invSearch.value);
+          }
+          renderTargetList(targetSearch.value);
+          updateWheel();
+          return;
+        } catch (err) {
+          lastErr = err;
+          console.warn(`[Апгрейдер] Зеркало не сработало (${base}):`, err.message);
+        }
+      }
+
+      SKINS_LOADING = false;
+      if (status) status.textContent = 'ошибка';
+      console.error('[Апгрейдер] Все зеркала недоступны:', lastErr);
+      showToast('Не удалось загрузить библиотеку');
+    }
+
+    function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function escapeAttr(s) { return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+    function getWeaponName(defIndex) {
+      const w = WEAPONS.find(w => w.id === String(defIndex));
+      return w ? w.name : ('Item #' + defIndex);
+    }
+    function getRarityColor(name) { return RARITY_COLORS[name] || '#3a3f4f'; }
+    function showToast(msg) {
+      const container = document.getElementById('toastContainer');
+      const el = document.createElement('div');
+      el.style.cssText = 'background:#0f141bfa;border:1px solid rgba(200,172,100,.4);padding:12px 24px;font-size:13px;color:#e0dbd0;box-shadow:0 8px 32px rgba(0,0,0,0.6);font-family:Rajdhani,sans-serif;font-weight:600;';
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 3000);
+    }
+
+    function switchView(name) {
+      const main = document.getElementById('view-main');
+      const up = document.getElementById('view-upgrader');
+      if (name === 'upgrader') {
+        main.style.display = 'none';
+        up.style.display = 'flex';
+        document.body.classList.add('upgrader-mode');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        if (!SKINS_LOADED) loadSkinsLibrary();
+      } else {
+        up.style.display = 'none';
+        main.style.display = 'block';
+        document.body.classList.remove('upgrader-mode');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+      document.querySelectorAll('.nav-item').forEach(a => {
+        const n = a.getAttribute('data-nav');
+        a.classList.toggle('!bg-purple/10', n === name);
+        a.classList.toggle('!border-purple/30', n === name);
+        a.classList.toggle('!text-white', n === name);
+      });
+    }
+
+    function parseKV(text) {
+      let i = 0; const len = text.length;
+      const isWS = c => c === ' ' || c === '\t' || c === '\n' || c === '\r';
+      function skipWS() {
+        while (i < len) {
+          const c = text[i];
+          if (isWS(c)) { i++; continue; }
+          if (c === '/' && text[i + 1] === '/') { while (i < len && text[i] !== '\n') i++; continue; }
+          break;
+        }
+      }
+      function parseToken() {
+        skipWS();
+        if (i >= len) return null;
+        const c = text[i];
+        if (c === '{') { i++; return { t: 'open' }; }
+        if (c === '}') { i++; return { t: 'close' }; }
+        if (c === '"') {
+          i++; let s = '';
+          while (i < len && text[i] !== '"') {
+            if (text[i] === '\\' && i + 1 < len) { s += text[i + 1]; i += 2; }
+            else { s += text[i]; i++; }
+          }
+          i++; return { t: 'str', v: s };
+        }
+        let s = '';
+        while (i < len && !isWS(text[i]) && text[i] !== '{' && text[i] !== '}' && text[i] !== '"') { s += text[i]; i++; }
+        return { t: 'str', v: s };
+      }
+      function parseObject() {
+        const obj = {};
+        while (i < len) {
+          skipWS();
+          if (i >= len) break;
+          if (text[i] === '}') break;
+          const key = parseToken();
+          if (!key || key.t !== 'str') break;
+          skipWS();
+          if (i < len && text[i] === '{') {
+            i++; obj[key.v] = parseObject(); skipWS();
+            if (i < len && text[i] === '}') i++;
+          } else {
+            const val = parseToken();
+            if (!val) break;
+            if (val.t === 'str') obj[key.v] = val.v;
+            else if (val.t === 'close') { i--; break; }
+          }
+        }
+        return obj;
+      }
+      skipWS();
+      const first = parseToken();
+      if (!first) return {};
+      if (first.t === 'open') return parseObject();
+      if (first.t === 'str') {
+        skipWS();
+        if (i < len && text[i] === '{') {
+          i++; const inner = parseObject(); skipWS();
+          if (i < len && text[i] === '}') i++;
+          return { [first.v]: inner };
+        }
+        return { [first.v]: '' };
+      }
+      return {};
+    }
+
+    function serializeKV(obj, indent = 0) {
+      const pad = '\t'.repeat(indent);
+      let out = '';
+      for (const key in obj) {
+        const val = obj[key];
+        if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+          out += `${pad}"${key}"\n${pad}{\n${serializeKV(val, indent + 1)}${pad}}\n`;
+        } else if (Array.isArray(val)) {
+          val.forEach(v => {
+            if (typeof v === 'object') out += `${pad}"${key}"\n${pad}{\n${serializeKV(v, indent + 1)}${pad}}\n`;
+            else out += `${pad}"${key}"\t\t"${String(v).replace(/"/g, '\\"')}"\n`;
+          });
+        } else {
+          const v = String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+          out += `${pad}"${key}"\t\t"${v}"\n`;
+        }
+      }
+      return out;
+    }
+
+    function findItemsNode(obj, depth = 0) {
+      if (!obj || typeof obj !== 'object' || depth > 15) return null;
+      for (const k in obj) {
+        if ((k === 'items' || k === 'Items') && obj[k] && typeof obj[k] === 'object') {
+          const first = Object.values(obj[k]).find(v => v && typeof v === 'object');
+          if (first && ('def_index' in first || 'DefIndex' in first)) return obj[k];
+        }
+      }
+      const keys = Object.keys(obj);
+      if (keys.length > 0 && keys.every(k => /^\d+$/.test(k))) {
+        const first = obj[keys[0]];
+        if (first && typeof first === 'object' && ('def_index' in first || 'DefIndex' in first)) return obj;
+      }
+      for (const k in obj) {
+        const child = obj[k];
+        if (child && typeof child === 'object') {
+          const found = findItemsNode(child, depth + 1);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+
+    const state = {
+      kvData: null, itemsMap: null, originalItemsMap: null,
+      items: [], inventorySkins: [],
+      selectedSourceId: null, selectedTargetSkin: null,
+      multiplier: 2, isSpinning: false,
+      originalFilename: null,
     };
+
+    const uploadScreen = document.getElementById('upgraderUploadScreen');
+    const upgraderMain = document.getElementById('upgraderMain');
+    const uploadZone = document.getElementById('upgraderUploadZone');
+    const fileInput = document.getElementById('upgraderFileInput');
+    const invList = document.getElementById('upgraderInvList');
+    const invCount = document.getElementById('upgraderInvCount');
+    const invSearch = document.getElementById('invSearchInput');
+    const targetList = document.getElementById('targetList');
+    const targetSearch = document.getElementById('targetSearchInput');
+    const wheelProgress = document.getElementById('wheelProgress');
+    const wheelPercent = document.getElementById('wheelPercent');
+    const wheelSpinner = document.getElementById('wheelSpinner');
+    const spinBtn = document.getElementById('spinBtn');
+    const sourceSlot = document.getElementById('sourceSlot');
+    const sourceSlotContent = document.getElementById('sourceSlotContent');
+    const targetSlot = document.getElementById('targetSlot');
+    const targetSlotContent = document.getElementById('targetSlotContent');
+    const sourceModal = document.getElementById('sourceModal');
+    const sourceModalList = document.getElementById('sourceModalList');
+    const sourceModalSearch = document.getElementById('sourceModalSearch');
+    const resultModal = document.getElementById('resultModal');
+    const resultModalContent = document.getElementById('resultModalContent');
+
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', e => {
+      e.preventDefault(); uploadZone.classList.remove('drag-over');
+      handleFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
+
+    function handleFile(file) {
+      if (!file) return;
+      const probe = new FileReader();
+      probe.onload = (ev) => {
+        const bytes = new Uint8Array(ev.target.result);
+        let encoding = 'utf-8';
+        if (bytes.length >= 2) {
+          if (bytes[0] === 0xFF && bytes[1] === 0xFE) encoding = 'utf-16le';
+          else if (bytes[0] === 0xFE && bytes[1] === 0xFF) encoding = 'utf-16be';
+        }
+        const reader = new FileReader();
+        reader.onload = (ev2) => {
+          let text = ev2.target.result;
+          if (text.length && text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+          text = text.replace(/^[\uFEFF\uFFFD\u0000]+/, '');
+          processInventoryText(text, file.name);
+        };
+        reader.readAsText(file, encoding);
+      };
+      probe.readAsArrayBuffer(file.slice(0, 4));
+    }
+
+    function processInventoryText(text, filename) {
+      try {
+        const parsed = parseKV(text);
+        const itemsNode = findItemsNode(parsed);
+        if (!itemsNode) { showToast('Не найдена секция "items"'); return; }
+        state.kvData = parsed;
+        state.itemsMap = itemsNode;
+        state.originalItemsMap = JSON.parse(JSON.stringify(itemsNode));
+        state.originalFilename = filename || 'inventory.txt';
+        state.items = Object.entries(itemsNode)
+          .filter(([, it]) => it && typeof it === 'object' && ('def_index' in it || 'DefIndex' in it))
+          .map(([id, item]) => ({
+            id,
+            def_index: item.def_index || item.DefIndex || '0',
+            quality: item.quality || item.Quality || '0',
+            rarity: item.rarity || item.Rarity || '0',
+            attributes: item.attribute || item.attributes || item.Attributes || {},
+            raw: item,
+          }));
+        if (state.items.length === 0) { showToast('Предметов не найдено'); return; }
+        state.inventorySkins = state.items.map(item => {
+          const pk = (item.attributes['6'] || '').trim();
+          const skin = SKINS.find(s => s.type === 'skin' && s.paint_index === pk && s.def_index === String(item.def_index));
+          return { ...item, skin };
+        });
+        uploadScreen.style.display = 'none';
+        upgraderMain.style.display = 'flex';
+        renderInventory();
+        renderTargetList('');
+        updateWheel();
+        showToast(`Загружено ${state.items.length} предметов`);
+
+        if (!SKINS_LOADED) {
+          loadSkinsLibrary().then(() => {
+            state.inventorySkins = state.items.map(item => {
+              const pk = (item.attributes['6'] || '').trim();
+              const skin = SKINS.find(s => s.type === 'skin' && s.paint_index === pk && s.def_index === String(item.def_index));
+              return { ...item, skin };
+            });
+            renderInventory(invSearch.value);
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Ошибка парсинга: ' + err.message);
+      }
+    }
+
+    function renderInventory(filter = '') {
+      const q = filter.toLowerCase().trim();
+      const list = state.inventorySkins.filter(item => {
+        if (!q) return true;
+        const wname = getWeaponName(item.def_index).toLowerCase();
+        return wname.includes(q) || String(item.id).includes(q);
+      });
+      invCount.textContent = state.items.length;
+      invList.innerHTML = list.map(item => {
+        const wname = getWeaponName(item.def_index);
+        const skin = item.skin;
+        const img = skin ? skin.image : '';
+        const rarityName = skin ? skin.rarity : (RARITY_BY_ID[String(item.rarity)] || 'Consumer Grade');
+        const rarityColor = getRarityColor(rarityName);
+        const wear = item.attributes['8'] || '';
+        const isSelected = state.selectedSourceId === item.id;
+        const skinName = skin ? skin.name : wname;
+        return `
+          <div class="inv-card ${isSelected ? 'selected' : ''}" onclick="selectSourceItem('${escapeAttr(item.id)}')">
+            <div class="inv-card__rarity" style="background:${rarityColor}"></div>
+            <div class="inv-card__thumb">
+              ${img ? `<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">` : '<div class="placeholder">?</div>'}
+            </div>
+            <div class="inv-card__info">
+              <div class="inv-card__name">${escapeHtml(skinName)}</div>
+              <div class="inv-card__meta">${wear ? 'Wear ' + Number(wear).toFixed(3) : 'Vanilla'}</div>
+            </div>
+          </div>
+        `;
+      }).join('') || '<div style="padding:16px;text-align:center;color:var(--csgo-text-muted);font-size:12px;">Ничего не найдено</div>';
+    }
+
+    invSearch.addEventListener('input', () => renderInventory(invSearch.value));
+
+    function selectSourceItem(id) {
+      if (state.isSpinning) return;
+      state.selectedSourceId = id;
+      renderInventory(invSearch.value);
+      renderSourceSlot();
+      updateSpinBtn();
+      updateWheel();
+    }
+
+    function renderSourceSlot() {
+      const item = state.inventorySkins.find(i => i.id === state.selectedSourceId);
+      if (!item) {
+        sourceSlotContent.innerHTML = '<div class="slot-box__placeholder">Нажмите, чтобы выбрать</div>';
+        sourceSlot.classList.remove('filled');
+        return;
+      }
+      const skin = item.skin;
+      const img = skin ? skin.image : '';
+      const name = skin ? skin.name : getWeaponName(item.def_index);
+      const rarity = skin ? skin.rarity : 'Consumer Grade';
+      sourceSlotContent.innerHTML = `
+        ${img ? `<img src="${img}" alt="">` : ''}
+        <div class="slot-box__name">${escapeHtml(name)}</div>
+        <div class="slot-box__price" style="color:${getRarityColor(rarity)}">${rarity}</div>
+      `;
+      sourceSlot.classList.add('filled');
+    }
+
+    function openSourcePicker() {
+      if (state.isSpinning) return;
+      if (state.items.length === 0) { showToast('Сначала загрузите inventory.txt'); return; }
+      sourceModal.style.display = 'grid';
+      renderSourceModalList('');
+      sourceModalSearch.value = '';
+      setTimeout(() => sourceModalSearch.focus(), 50);
+    }
+
+    sourceModalSearch.addEventListener('input', () => renderSourceModalList(sourceModalSearch.value));
+
+    function renderSourceModalList(q) {
+      const query = q.toLowerCase().trim();
+      const list = state.inventorySkins.filter(item => {
+        if (!query) return true;
+        const wname = getWeaponName(item.def_index).toLowerCase();
+        return wname.includes(query) || String(item.id).includes(query);
+      });
+      sourceModalList.innerHTML = list.map(item => {
+        const skin = item.skin;
+        const img = skin ? skin.image : '';
+        const name = skin ? skin.name : getWeaponName(item.def_index);
+        const rarity = skin ? skin.rarity : 'Consumer Grade';
+        return `
+          <div class="target-card" onclick="selectSourceFromModal('${escapeAttr(item.id)}')">
+            <div class="target-card__rarity" style="background:${getRarityColor(rarity)}"></div>
+            <div class="target-card__thumb">${img ? `<img src="${img}" alt="" loading="lazy">` : ''}</div>
+            <div class="target-card__info">
+              <div class="target-card__name">${escapeHtml(name)}</div>
+              <div class="target-card__meta">${rarity}</div>
+            </div>
+          </div>
+        `;
+      }).join('') || '<div style="padding:16px;text-align:center;color:var(--csgo-text-muted);">Ничего не найдено</div>';
+    }
+
+    function selectSourceFromModal(id) {
+      state.selectedSourceId = id;
+      closeSourceModal();
+      renderInventory(invSearch.value);
+      renderSourceSlot();
+      updateSpinBtn();
+      updateWheel();
+    }
+
+    function closeSourceModal() { sourceModal.style.display = 'none'; }
+    sourceModal.addEventListener('click', e => { if (e.target === sourceModal) closeSourceModal(); });
+
+    function renderTargetList(q) {
+      if (!SKINS_LOADED) {
+        targetList.innerHTML = '<div style="padding:16px;text-align:center;color:var(--csgo-text-muted);font-size:12px;">Загрузка библиотеки...</div>';
+        return;
+      }
+      const query = q.toLowerCase().trim();
+      const source = query ? SKINS : SKINS.filter(s => s.type === 'skin').slice(0, 60);
+      const list = source.filter(s =>
+        !query || s.name.toLowerCase().includes(query) || String(s.paint_index).includes(query)
+      ).slice(0, 200);
+
+      targetList.innerHTML = list.map(skin => {
+        const rarityColor = getRarityColor(skin.rarity);
+        const isSelected = state.selectedTargetSkin && state.selectedTargetSkin.id === skin.id;
+        const kind = skin.type === 'sticker' ? 'НАКЛЕЙКА' : skin.rarity;
+        return `
+          <div class="target-card ${isSelected ? 'selected' : ''}" onclick="selectTargetSkin('${escapeAttr(skin.id)}')">
+            <div class="target-card__rarity" style="background:${rarityColor}"></div>
+            <div class="target-card__thumb"><img src="${skin.image}" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+            <div class="target-card__info">
+              <div class="target-card__name">${escapeHtml(skin.name)}</div>
+              <div class="target-card__meta">${kind}</div>
+            </div>
+          </div>
+        `;
+      }).join('') || '<div style="padding:16px;text-align:center;color:var(--csgo-text-muted);">Ничего не найдено</div>';
+    }
+
+    targetSearch.addEventListener('input', () => renderTargetList(targetSearch.value));
+
+    function selectTargetSkin(id) {
+      if (state.isSpinning) return;
+      const skin = SKINS.find(s => s.id === id);
+      if (!skin) return;
+      state.selectedTargetSkin = skin;
+      renderTargetList(targetSearch.value);
+      renderTargetSlot();
+      updateSpinBtn();
+      updateWheel();
+    }
+
+    function renderTargetSlot() {
+      const skin = state.selectedTargetSkin;
+      if (!skin) {
+        targetSlotContent.innerHTML = '<div class="slot-box__placeholder">Нажмите, чтобы выбрать</div>';
+        targetSlot.classList.remove('filled');
+        return;
+      }
+      const kind = skin.type === 'sticker' ? 'НАКЛЕЙКА' : skin.rarity;
+      targetSlotContent.innerHTML = `
+        <img src="${skin.image}" alt="">
+        <div class="slot-box__name">${escapeHtml(skin.name)}</div>
+        <div class="slot-box__price" style="color:${getRarityColor(skin.rarity)}">${kind}</div>
+      `;
+      targetSlot.classList.add('filled');
+    }
+
+    function openTargetPicker() {
+      if (state.isSpinning) return;
+      showToast('Выберите целевой предмет из библиотеки справа');
+    }
+
+    document.querySelectorAll('.mult-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (state.isSpinning) return;
+        document.querySelectorAll('.mult-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.multiplier = Number(btn.dataset.mult);
+        updateWheel();
+        updateSpinBtn();
+      });
+    });
+
+    /* === ШАНС: itemValue(source) / itemValue(target) * (100/mult) * 1.5 === */
+    function computeChance() {
+      const source = state.inventorySkins.find(i => i.id === state.selectedSourceId);
+      const target = state.selectedTargetSkin;
+      if (!source || !target) return 50;
+
+      // Значение источника
+      let srcVal;
+      if (source.skin && source.skin.type === 'skin') {
+        srcVal = itemValue(source.skin);
+      } else if (source.skin && source.skin.type === 'sticker') {
+        srcVal = itemValue(source.skin);
+      } else {
+        // Fallback: используем rarity из inventory.txt + weapon factor
+        const rar = RARITY_BY_ID[String(source.rarity)] || 'Consumer Grade';
+        srcVal = rarityScore(rar) * weaponFactor(source.def_index);
+      }
+
+      const tgtVal = itemValue(target);
+      const mult = state.multiplier;
+
+      const raw = (srcVal / tgtVal) * (100 / mult) * 1.5;
+      return Math.max(1, Math.min(95, raw));
+    }
+
+    function updateWheel() {
+      const chance = computeChance();
+      wheelPercent.textContent = (Math.round(chance * 100) / 100) + '%';
+      const circumference = 2 * Math.PI * 88;
+      const dash = (chance / 100) * circumference;
+      wheelProgress.setAttribute('stroke-dasharray', `${dash} ${circumference - dash}`);
+    }
+
+    function updateSpinBtn() {
+      const ready = state.selectedSourceId && state.selectedTargetSkin && !state.isSpinning;
+      spinBtn.disabled = !ready;
+    }
+
+    spinBtn.addEventListener('click', () => {
+      if (state.isSpinning) return;
+      if (!state.selectedSourceId || !state.selectedTargetSkin) return;
+
+      state.isSpinning = true;
+      spinBtn.disabled = true;
+      spinBtn.textContent = 'Крутится...';
+
+      const chance = computeChance();
+      const chanceDeg = (chance / 100) * 360;
+      const win = Math.random() * 100 < chance;
+
+      let baseRot;
+      if (win) {
+        baseRot = 360 - chanceDeg + Math.random() * chanceDeg;
+      } else {
+        baseRot = Math.random() * (360 - chanceDeg);
+      }
+      const totalDeg = 1440 + baseRot;
+
+      wheelSpinner.style.transition = 'none';
+      wheelSpinner.style.transform = 'rotate(0deg)';
+      void wheelSpinner.offsetWidth;
+      wheelSpinner.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+      wheelSpinner.style.transform = `rotate(${totalDeg}deg)`;
+
+      setTimeout(() => {
+        state.isSpinning = false;
+        spinBtn.textContent = '⚡ Прокачать';
+
+        if (win) {
+          const target = state.selectedTargetSkin;
+          const itemIndex = state.items.findIndex(i => i.id === state.selectedSourceId);
+          if (itemIndex !== -1) {
+            const old = state.items[itemIndex];
+            const raw = state.itemsMap[old.id];
+
+            if (target.type === 'sticker') {
+              const newItem = {
+                ...old,
+                def_index: STICKER_ITEM_DEF_INDEX,
+                quality: '4',
+                rarity: '4',
+                attributes: { ...old.attributes, [STICKER_KIT_ATTR]: target.sticker_index, '114': '0' },
+              };
+              state.items[itemIndex] = newItem;
+              if (raw) {
+                raw.def_index = STICKER_ITEM_DEF_INDEX;
+                raw.quality = '4';
+                raw.rarity = '4';
+                if (!raw.attribute) raw.attribute = {};
+                raw.attribute[STICKER_KIT_ATTR] = target.sticker_index;
+                raw.attribute['114'] = '0';
+              }
+              const idx2 = state.inventorySkins.findIndex(i => i.id === old.id);
+              if (idx2 !== -1) state.inventorySkins[idx2] = { ...newItem, skin: target };
+            } else {
+              const newItem = {
+                ...old,
+                def_index: target.def_index,
+                attributes: { ...old.attributes, '6': target.paint_index, '8': '0.000000' },
+              };
+              state.items[itemIndex] = newItem;
+              if (raw) {
+                raw.def_index = target.def_index;
+                if (!raw.attribute) raw.attribute = {};
+                raw.attribute['6'] = target.paint_index;
+                raw.attribute['8'] = '0.000000';
+              }
+              const idx2 = state.inventorySkins.findIndex(i => i.id === old.id);
+              if (idx2 !== -1) state.inventorySkins[idx2] = { ...newItem, skin: target };
+            }
+          }
+          showResultModal(true, target);
+        } else {
+          const itemIndex = state.items.findIndex(i => i.id === state.selectedSourceId);
+          if (itemIndex !== -1) {
+            const removed = state.items.splice(itemIndex, 1)[0];
+            delete state.itemsMap[removed.id];
+            const idx2 = state.inventorySkins.findIndex(i => i.id === removed.id);
+            if (idx2 !== -1) state.inventorySkins.splice(idx2, 1);
+          }
+          showResultModal(false, null);
+        }
+
+        wheelSpinner.style.transition = 'none';
+        wheelSpinner.style.transform = 'rotate(0deg)';
+
+        state.selectedSourceId = null;
+        state.selectedTargetSkin = null;
+        renderInventory(invSearch.value);
+        renderSourceSlot();
+        renderTargetSlot();
+        renderTargetList(targetSearch.value);
+        updateSpinBtn();
+        updateWheel();
+      }, 4200);
+    });
+
+    function showResultModal(win, target) {
+      resultModal.style.display = 'grid';
+      if (win) {
+        resultModalContent.innerHTML = `
+          <div style="font-size:48px;margin-bottom:16px;">🎉</div>
+          <h3 style="color:#8dffb9;font-size:24px;font-weight:900;margin-bottom:8px;">УСПЕХ!</h3>
+          <p style="color:var(--csgo-text-muted);font-size:13px;margin-bottom:16px;">Вы получили</p>
+          <img src="${target.image}" alt="" style="width:200px;height:130px;object-fit:contain;margin:0 auto 12px;display:block;">
+          <p style="font-size:16px;font-weight:700;color:#fff;">${escapeHtml(target.name)}</p>
+          <button class="btn btn--primary" onclick="closeResultModal()" style="margin-top:20px;width:100%;">Продолжить</button>
+        `;
+      } else {
+        resultModalContent.innerHTML = `
+          <div style="font-size:48px;margin-bottom:16px;">💀</div>
+          <h3 style="color:#ff8b8b;font-size:24px;font-weight:900;margin-bottom:8px;">ПРОВАЛ</h3>
+          <p style="color:var(--csgo-text-muted);font-size:13px;margin-bottom:24px;">Ваш предмет был потерян</p>
+          <button class="btn btn--primary" onclick="closeResultModal()" style="width:100%;">Продолжить</button>
+        `;
+      }
+    }
+
+    function closeResultModal() { resultModal.style.display = 'none'; }
+    resultModal.addEventListener('click', e => { if (e.target === resultModal) closeResultModal(); });
+
+    function saveInventory() {
+      if (!state.kvData) { showToast('Сначала загрузите inventory.txt'); return; }
+      try {
+        const text = serializeKV(state.kvData);
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = state.originalFilename || 'inventory.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Сохранено: ' + a.download);
+      } catch (e) { showToast('Ошибка сохранения'); }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 's' && (e.ctrlKey || e.metaKey) && document.body.classList.contains('upgrader-mode')) {
+        e.preventDefault(); saveInventory();
+      }
+    });
+
+    const newsData = [
+      { headline: "Запретная Зона расширяется!", body: "Эксперимент развивается. Чтобы остаться в живых до конца, вам придется испытать свои навыки — с новыми картами и вещами, например респавнами, экзо-прыгами и толчковыми минами!", tag: "обновление", image: "https://clan.steamstatic.com/images/3381077/80621b2b2efdb8e77fefcf7689fd03dd5003782f.png", url: "https://store.steampowered.com/news/app/730" },
+      { headline: "Операция «Хищные Воды»", body: "Представляем операцию «Хищные воды», в которую входят новые карты, новые миссии и новые способы игры в ваших любимых режимах! Активируйте пропуск на операцию и выполняйте миссии, чтобы получать награды.", tag: "обновление", image: "https://images.steamusercontent.com/ugc/4122474773860967943/56E309B41788AA9E886F768D984286DBEA241198/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true", url: "https://store.steampowered.com/news/app/730" }
+    ];
+    document.getElementById('newsContainer').innerHTML = newsData.map(item => `
+      <div class="rounded-xl border border-white/5 bg-[#0f141b] overflow-hidden card-hover animate-on-scroll visible">
+        <img src="${item.image}" alt="${item.headline}" class="news-img" loading="lazy">
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple bg-purple/10 px-3 py-1 rounded-full border border-purple/20">${item.tag}</span>
+            <span class="text-xs text-[#8a93a8]/40">${new Date().toLocaleDateString('ru-RU')}</span>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-1.5">${item.headline}</h3>
+          <p class="text-sm text-[#8a93a8]/70 leading-relaxed mb-4">${item.body}</p>
+          <a href="${item.url}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-purple hover:text-purple/80 transition-colors">Читать далее →</a>
+        </div>
+      </div>
+    `).join('');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -412,26 +1502,15 @@
           observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
-
+    }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      if (!el.classList.contains('visible')) {
-        observer.observe(el);
-      }
+      if (!el.classList.contains('visible')) observer.observe(el);
     });
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          e.preventDefault();
-          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
+    switchView('main');
+    updateWheel();
+    updateSpinBtn();
+    setTimeout(() => { if (!SKINS_LOADED) loadSkinsLibrary(); }, 2000);
   </script>
-
 </body>
 </html>
