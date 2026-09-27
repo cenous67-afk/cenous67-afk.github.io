@@ -73,8 +73,9 @@
     #view-upgrader {
       font-family: 'Rajdhani', 'Barlow Condensed', sans-serif;
       --csgo-panel-bg-strong: rgba(6, 9, 13, .97);
-      --csgo-border: rgba(180, 156, 98, .42);
-      --csgo-accent: #e09428;
+      --csgo-border: rgba(155, 89, 182, .42);
+      --csgo-accent: #9b59b6;
+      --csgo-accent-light: #c39bd3;
       --csgo-text-muted: rgba(190, 183, 168, .72);
       color: #d8d4cc;
       display: flex;
@@ -85,6 +86,7 @@
     }
     body.upgrader-mode { height: 100vh; overflow: hidden; }
     body.upgrader-mode #view-upgrader { min-height: 0; }
+    body.upgrader-mode .disclaimer-bar { display: none; }
 
     #view-upgrader h1, #view-upgrader h2, #view-upgrader h3 { margin: 0; }
     #view-upgrader button { cursor: pointer; font-family: inherit; border: none; background: transparent; color: inherit; }
@@ -100,15 +102,18 @@
     }
     #view-upgrader .btn:hover { background: linear-gradient(180deg, #343e4aeb, #20262eeb); transform: translateY(-1px); }
     #view-upgrader .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-    #view-upgrader .btn--primary { background: linear-gradient(180deg, #e8a030, #b87018); border-color: #d48a20; color: #0c0a06; }
-    #view-upgrader .btn--primary:hover { background: linear-gradient(180deg, #f0b040, #c88020); }
+    #view-upgrader .btn--primary {
+      background: linear-gradient(180deg, #9b59b6, #7d3c98);
+      border-color: #8e44ad; color: #fff;
+    }
+    #view-upgrader .btn--primary:hover { background: linear-gradient(180deg, #af7ac5, #9b59b6); }
     #view-upgrader .btn--ghost { background: transparent; border-color: rgba(143,154,168,.47); color: #d1cbbe; }
     #view-upgrader .input {
       width: 100%; background: #06090dfc; border: 1px solid rgba(147,158,171,.48);
       color: #e0d9cc; padding: 10px 12px; border-radius: 0; font-family: inherit; font-size: 13px;
       margin-top: 6px; outline: none;
     }
-    #view-upgrader .input:focus { border-color: #c79b4a9e; box-shadow: inset 0 0 0 1px #c79b4a47; }
+    #view-upgrader .input:focus { border-color: rgba(155,89,182,.7); box-shadow: inset 0 0 0 1px rgba(155,89,182,.3); }
 
     #upgraderMain {
       display: flex;
@@ -139,14 +144,14 @@
     #view-upgrader .inventory-header,
     #view-upgrader .target-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px; border-bottom: 1px solid rgba(188,160,88,.3); flex-shrink: 0;
+      padding: 10px 14px; border-bottom: 1px solid rgba(155,89,182,.3); flex-shrink: 0;
     }
     #view-upgrader .inventory-header h3,
     #view-upgrader .target-header h3 {
       font-size: 12px; text-transform: uppercase; letter-spacing: .15em;
       color: var(--csgo-text-muted); font-weight: 700;
     }
-    #view-upgrader .inventory-count { font-size: 11px; color: var(--csgo-accent); font-weight: 700; }
+    #view-upgrader .inventory-count { font-size: 11px; color: var(--csgo-accent-light); font-weight: 700; }
     #view-upgrader .inventory-search, #view-upgrader .target-search {
       padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0;
     }
@@ -169,11 +174,11 @@
       flex-shrink: 0;
     }
     #view-upgrader .inv-card:hover, #view-upgrader .target-card:hover {
-      background: rgba(224,148,40,0.06); border-color: rgba(224,148,40,0.3);
+      background: rgba(155,89,182,0.06); border-color: rgba(155,89,182,0.3);
     }
     #view-upgrader .inv-card.selected, #view-upgrader .target-card.selected {
-      border-color: var(--csgo-accent); background: rgba(224,148,40,0.1);
-      box-shadow: 0 0 12px rgba(224,148,40,0.2);
+      border-color: var(--csgo-accent); background: rgba(155,89,182,0.12);
+      box-shadow: 0 0 12px rgba(155,89,182,0.25);
     }
     #view-upgrader .inv-card__thumb, #view-upgrader .target-card__thumb {
       width: 52px; height: 40px; flex-shrink: 0;
@@ -207,57 +212,46 @@
     }
     #view-upgrader .upgrade-title {
       font-size: 20px; font-weight: 900; text-transform: uppercase;
-      letter-spacing: .12em; color: var(--csgo-accent);
-      text-shadow: 0 0 20px rgba(224,148,40,0.4); margin-bottom: 20px;
+      letter-spacing: .12em; color: var(--csgo-accent-light);
+      text-shadow: 0 0 20px rgba(155,89,182,0.5); margin-bottom: 20px;
       flex-shrink: 0;
     }
     #view-upgrader .wheel-wrapper {
       position: relative; width: 280px; height: 280px; margin-bottom: 20px;
       flex-shrink: 0;
     }
-    #view-upgrader .wheel-spinner {
-      position: absolute;
-      inset: 0;
-    }
+    #view-upgrader .wheel-spinner { position: absolute; inset: 0; }
     #view-upgrader .wheel-svg { width: 100%; height: 100%; }
     #view-upgrader .wheel-svg circle { fill: none; stroke-linecap: butt; }
     #view-upgrader .wheel-bg { stroke: rgba(255,255,255,0.06); stroke-width: 18; }
-    #view-upgrader .wheel-progress { stroke: var(--csgo-accent); stroke-width: 18; transition: stroke-dasharray 0.4s ease; }
+    #view-upgrader .wheel-progress { stroke: var(--csgo-accent); stroke-width: 18; transition: stroke-dasharray 0.4s ease; filter: drop-shadow(0 0 6px rgba(155,89,182,0.6)); }
     #view-upgrader .wheel-center {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       text-align: center; z-index: 5; pointer-events: none;
     }
     #view-upgrader .wheel-percent {
       font-size: 40px; font-weight: 900; color: #fff; line-height: 1;
-      text-shadow: 0 0 20px rgba(224,148,40,0.3);
+      text-shadow: 0 0 20px rgba(155,89,182,0.5);
     }
     #view-upgrader .wheel-label {
       font-size: 10px; text-transform: uppercase; letter-spacing: .2em;
       color: var(--csgo-text-muted); margin-top: 4px;
     }
-
     #view-upgrader .wheel-pointer {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
+      position: absolute; top: 50%; left: 50%;
+      width: 0; height: 0;
       transform-origin: 0 0;
-      z-index: 6;
-      pointer-events: none;
-      will-change: transform;
+      z-index: 6; pointer-events: none; will-change: transform;
     }
     #view-upgrader .wheel-pointer::before {
       content: '';
       position: absolute;
-      left: -12px;
-      top: -160px;
-      width: 0;
-      height: 0;
+      left: -12px; top: -160px;
+      width: 0; height: 0;
       border-left: 12px solid transparent;
       border-right: 12px solid transparent;
       border-top: 22px solid var(--csgo-accent);
-      filter: drop-shadow(0 0 8px rgba(224,148,40,0.9));
+      filter: drop-shadow(0 0 8px rgba(155,89,182,0.9));
     }
 
     #view-upgrader .slots-row {
@@ -273,10 +267,10 @@
       cursor: pointer; position: relative;
     }
     #view-upgrader .slot-box:hover {
-      border-color: rgba(224,148,40,0.4); background: rgba(224,148,40,0.03);
+      border-color: rgba(155,89,182,0.4); background: rgba(155,89,182,0.04);
     }
     #view-upgrader .slot-box.filled {
-      border-style: solid; border-color: rgba(224,148,40,0.3); background: rgba(224,148,40,0.05);
+      border-style: solid; border-color: rgba(155,89,182,0.4); background: rgba(155,89,182,0.08);
     }
     #view-upgrader .slot-box__label {
       font-size: 9px; text-transform: uppercase; letter-spacing: .15em;
@@ -291,7 +285,7 @@
       text-align: center; white-space: nowrap; overflow: hidden;
       text-overflow: ellipsis; max-width: 100%;
     }
-    #view-upgrader .slot-box__price { font-size: 10px; color: var(--csgo-accent); font-weight: 700; }
+    #view-upgrader .slot-box__price { font-size: 10px; color: var(--csgo-accent-light); font-weight: 700; }
     #view-upgrader .slot-box__placeholder { color: rgba(138,147,168,0.3); font-size: 11px; text-align: center; }
 
     #view-upgrader .multiplier-row {
@@ -305,98 +299,76 @@
       transition: all .2s ease; border-radius: 0;
     }
     #view-upgrader .mult-btn:hover {
-      border-color: rgba(224,148,40,0.4); color: #e0dbd0; background: rgba(224,148,40,0.06);
+      border-color: rgba(155,89,182,0.5); color: #e0dbd0; background: rgba(155,89,182,0.08);
     }
     #view-upgrader .mult-btn.active {
-      border-color: var(--csgo-accent); color: #0c0a06;
-      background: var(--csgo-accent); box-shadow: 0 0 16px rgba(224,148,40,0.4);
+      border-color: var(--csgo-accent); color: #fff;
+      background: var(--csgo-accent); box-shadow: 0 0 16px rgba(155,89,182,0.5);
     }
 
     #view-upgrader .god-toggle {
       margin-top: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      display: inline-flex; align-items: center; gap: 10px;
       padding: 6px 14px;
       border: 1px solid rgba(255,255,255,0.1);
       background: rgba(255,255,255,0.03);
       color: var(--csgo-text-muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
       text-transform: uppercase;
       transition: all .2s ease;
-      cursor: pointer;
-      flex-shrink: 0;
-      user-select: none;
+      cursor: pointer; flex-shrink: 0; user-select: none;
       position: relative;
     }
     #view-upgrader .god-toggle:hover {
-      border-color: rgba(224,148,40,0.5);
-      color: #e0dbd0;
+      border-color: rgba(155,89,182,0.5); color: #e0dbd0;
     }
     #view-upgrader .god-toggle__indicator {
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       border: 1px solid rgba(255,255,255,0.25);
       background: rgba(0,0,0,0.4);
-      transition: all .2s ease;
-      position: relative;
+      transition: all .2s ease; position: relative;
     }
     #view-upgrader .god-toggle__indicator::after {
       content: '';
-      position: absolute;
-      inset: 2px;
-      background: transparent;
-      transition: all .2s ease;
+      position: absolute; inset: 2px;
+      background: transparent; transition: all .2s ease;
     }
     #view-upgrader .god-toggle.active {
-      border-color: #f0b040;
-      color: #f0b040;
-      background: rgba(224,148,40,0.1);
-      box-shadow: 0 0 16px rgba(224,148,40,0.35);
+      border-color: #c39bd3;
+      color: #c39bd3;
+      background: rgba(155,89,182,0.12);
+      box-shadow: 0 0 16px rgba(155,89,182,0.4);
     }
-    #view-upgrader .god-toggle.active .god-toggle__indicator {
-      border-color: #f0b040;
-    }
+    #view-upgrader .god-toggle.active .god-toggle__indicator { border-color: #c39bd3; }
     #view-upgrader .god-toggle.active .god-toggle__indicator::after {
-      background: #f0b040;
-      box-shadow: 0 0 8px #f0b040;
+      background: #c39bd3; box-shadow: 0 0 8px #c39bd3;
     }
-    /* Заблокированный во время прокрутки */
     #view-upgrader .god-toggle.locked {
-      pointer-events: none;
-      opacity: 0.4;
-      cursor: not-allowed;
+      pointer-events: none; opacity: 0.4; cursor: not-allowed;
       filter: grayscale(0.4);
     }
     #view-upgrader .god-toggle.locked::after {
       content: 'во время прокрутки';
-      position: absolute;
-      top: -18px;
-      left: 50%;
+      position: absolute; top: -18px; left: 50%;
       transform: translateX(-50%);
-      font-size: 9px;
-      color: #f0b040;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      white-space: nowrap;
-      opacity: 0.8;
+      font-size: 9px; color: #c39bd3;
+      text-transform: uppercase; letter-spacing: .1em;
+      white-space: nowrap; opacity: 0.8;
     }
 
     #view-upgrader .spin-btn {
       margin-top: 18px; width: 100%; max-width: 400px;
       padding: 15px 24px; font-size: 16px; font-weight: 900;
       letter-spacing: .12em; text-transform: uppercase;
-      background: linear-gradient(180deg, #e8a030, #b87018);
-      border: 1px solid #d48a20; color: #0c0a06;
+      background: linear-gradient(180deg, #9b59b6, #7d3c98);
+      border: 1px solid #8e44ad; color: #fff;
       transition: all .2s ease; border-radius: 0;
-      box-shadow: 0 4px 20px rgba(224,148,40,0.3);
+      box-shadow: 0 4px 20px rgba(155,89,182,0.4);
       flex-shrink: 0;
     }
     #view-upgrader .spin-btn:hover:not(:disabled) {
-      background: linear-gradient(180deg, #f0b040, #c88020);
-      box-shadow: 0 6px 28px rgba(224,148,40,0.45);
+      background: linear-gradient(180deg, #af7ac5, #9b59b6);
+      box-shadow: 0 6px 28px rgba(155,89,182,0.6);
       transform: translateY(-2px);
     }
     #view-upgrader .spin-btn:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
@@ -407,7 +379,7 @@
     }
     #view-upgrader .modal-card {
       width: min(520px, 90vw); max-height: 85vh;
-      background: #080b0ffc; border: 1px solid rgba(200,172,100,.52);
+      background: #080b0ffc; border: 1px solid rgba(155,89,182,.52);
       padding: 24px; color: #e4dece;
       box-shadow: 0 0 60px rgba(0,0,0,0.9);
       display: flex; flex-direction: column; gap: 16px;
@@ -423,17 +395,61 @@
     }
     #view-upgrader .upload-zone {
       width: 100%; max-width: 560px;
-      border: 2px dashed rgba(224,148,40,0.3);
-      background: rgba(224,148,40,0.02);
+      border: 2px dashed rgba(155,89,182,0.35);
+      background: rgba(155,89,182,0.03);
       padding: 48px 32px; text-align: center; cursor: pointer;
       transition: all .25s ease;
     }
     #view-upgrader .upload-zone:hover, #view-upgrader .upload-zone.drag-over {
-      border-color: var(--csgo-accent); background: rgba(224,148,40,0.06);
+      border-color: var(--csgo-accent); background: rgba(155,89,182,0.08);
     }
     #view-upgrader .upload-zone__icon { font-size: 40px; margin-bottom: 16px; opacity: 0.6; }
     #view-upgrader .upload-zone__title { font-size: 16px; font-weight: 700; color: #e0dbd0; margin-bottom: 8px; }
     #view-upgrader .upload-zone__subtitle { font-size: 12px; color: var(--csgo-text-muted); }
+
+    /* Result popup — снизу */
+    #resultPopup {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(calc(100% + 40px));
+      opacity: 0;
+      transition: transform .4s cubic-bezier(.17,.67,.12,.99), opacity .3s ease;
+      z-index: 200;
+      width: min(460px, 92vw);
+      background: #080b0ffc;
+      border: 1px solid rgba(155,89,182,.52);
+      padding: 18px 22px;
+      color: #e4dece;
+      box-shadow: 0 20px 60px rgba(0,0,0,.9), 0 0 40px rgba(155,89,182,.15);
+      pointer-events: none;
+    }
+    #resultPopup.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #resultPopup.result-popup--win {
+      border-color: rgba(141,255,185,.6);
+      box-shadow: 0 20px 60px rgba(0,0,0,.9), 0 0 40px rgba(141,255,185,.25);
+    }
+    #resultPopup.result-popup--lose {
+      border-color: rgba(255,139,139,.6);
+      box-shadow: 0 20px 60px rgba(0,0,0,.9), 0 0 40px rgba(255,139,139,.25);
+    }
+    #resultPopup.result-popup--god {
+      border-color: rgba(195,155,211,.6);
+      box-shadow: 0 20px 60px rgba(0,0,0,.9), 0 0 40px rgba(155,89,182,.35);
+    }
+    #resultPopup .result-popup__close {
+      position: absolute; top: 6px; right: 8px;
+      width: 22px; height: 22px; font-size: 16px; line-height: 1;
+      color: var(--csgo-text-muted);
+      background: transparent; border: none;
+      cursor: pointer; font-family: inherit;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #resultPopup .result-popup__close:hover { color: #fff; }
 
     @media (max-width: 1100px) {
       #view-upgrader .upgrader-layout {
@@ -693,9 +709,9 @@
             <input type="text" id="targetSearchInput" class="input" placeholder="Поиск скина / наклейки...">
           </div>
           <div class="target-list" id="targetList"></div>
-          <div style="padding:8px;border-top:1px solid rgba(188,160,88,.3);flex-shrink:0;">
+          <div style="padding:8px;border-top:1px solid rgba(155,89,182,.3);flex-shrink:0;">
             <button class="btn btn--ghost" style="width:100%;" id="saveBtn" onclick="saveInventory()">💾 Сохранить inventory.txt</button>
-            <div id="saveWarning" style="display:none;margin-top:6px;font-size:10px;color:#f0b040;text-align:center;text-transform:uppercase;letter-spacing:.1em;">⚠ Режим бога: сохранение недоступно</div>
+            <div id="saveWarning" style="display:none;margin-top:6px;font-size:10px;color:#c39bd3;text-align:center;text-transform:uppercase;letter-spacing:.1em;">⚠ Режим бога: сохранение недоступно</div>
           </div>
         </div>
       </div>
@@ -711,16 +727,15 @@
     </div>
   </div>
 
-  <div id="resultModal" class="modal-backdrop" style="display:none;">
-    <div class="modal-card" style="max-width:420px;text-align:center;">
-      <div id="resultModalContent"></div>
-    </div>
+  <div id="resultPopup">
+    <button class="result-popup__close" onclick="closeResultModal()">×</button>
+    <div id="resultPopupContent"></div>
   </div>
 
-  <div id="toastContainer" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;display:flex;flex-direction:column;gap:8px;align-items:center;"></div>
+  <div id="toastContainer" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;"></div>
 
   <footer class="mt-auto border-t border-[rgba(60,70,92,0.3)] bg-[rgba(10,12,16,0.95)] backdrop-blur-sm">
-    <div class="border-b border-white/5 bg-[#0a0d12]">
+    <div class="disclaimer-bar border-b border-white/5 bg-[#0a0d12]">
       <div class="mx-auto flex max-w-7xl items-start gap-2.5 px-4 py-3">
         <p class="text-[11px] leading-relaxed text-purple/40">ChmonyaClient — фанатский проект для последней официальной версии Counter-Strike: Global Offensive (App ID: 4465480). Проект не связан с Valve Corporation.</p>
       </div>
@@ -815,6 +830,26 @@
       if (!item) return 1;
       if (item.type === 'sticker') return stickerValue(item);
       return rarityScore(item.rarity) * weaponFactor(item.def_index);
+    }
+
+    /* ====== Хелперы для атрибутов ======
+       В разных файлах inventory поле называется по-разному:
+       "attributes" (мн.ч.), "attribute" (ед.ч.) или "Attributes".
+       Не создаём новое поле — работаем с тем, что реально есть. */
+    function findAttrField(raw) {
+      if (!raw || typeof raw !== 'object') return null;
+      if (raw.attributes && typeof raw.attributes === 'object') return 'attributes';
+      if (raw.attribute && typeof raw.attribute === 'object') return 'attribute';
+      if (raw.Attributes && typeof raw.Attributes === 'object') return 'Attributes';
+      return null;
+    }
+    function setRawAttr(raw, key, value) {
+      let field = findAttrField(raw);
+      if (!field) {
+        raw.attributes = {};
+        field = 'attributes';
+      }
+      raw[field][String(key)] = String(value);
     }
 
     async function fetchJSON(url) {
@@ -937,7 +972,7 @@
     function showToast(msg) {
       const container = document.getElementById('toastContainer');
       const el = document.createElement('div');
-      el.style.cssText = 'background:#0f141bfa;border:1px solid rgba(200,172,100,.4);padding:12px 24px;font-size:13px;color:#e0dbd0;box-shadow:0 8px 32px rgba(0,0,0,0.6);font-family:Rajdhani,sans-serif;font-weight:600;';
+      el.style.cssText = 'background:#0f141bfa;border:1px solid rgba(155,89,182,.5);padding:12px 24px;font-size:13px;color:#e0dbd0;box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 20px rgba(155,89,182,.15);font-family:Rajdhani,sans-serif;font-weight:600;pointer-events:auto;';
       el.textContent = msg;
       container.appendChild(el);
       setTimeout(() => el.remove(), 3000);
@@ -1104,14 +1139,13 @@
     const sourceModal = document.getElementById('sourceModal');
     const sourceModalList = document.getElementById('sourceModalList');
     const sourceModalSearch = document.getElementById('sourceModalSearch');
-    const resultModal = document.getElementById('resultModal');
-    const resultModalContent = document.getElementById('resultModalContent');
+    const resultPopup = document.getElementById('resultPopup');
+    const resultPopupContent = document.getElementById('resultPopupContent');
     const godToggle = document.getElementById('godToggle');
     const saveBtn = document.getElementById('saveBtn');
     const saveWarning = document.getElementById('saveWarning');
 
     function toggleGodMode() {
-      // Блокировка во время прокрутки
       if (state.isSpinning) {
         showToast('⏳ Подождите завершения прокрутки');
         return;
@@ -1182,14 +1216,17 @@
         state.originalFilename = filename || 'inventory.txt';
         state.items = Object.entries(itemsNode)
           .filter(([, it]) => it && typeof it === 'object' && ('def_index' in it || 'DefIndex' in it))
-          .map(([id, item]) => ({
-            id,
-            def_index: item.def_index || item.DefIndex || '0',
-            quality: item.quality || item.Quality || '0',
-            rarity: item.rarity || item.Rarity || '0',
-            attributes: item.attribute || item.attributes || item.Attributes || {},
-            raw: item,
-          }));
+          .map(([id, item]) => {
+            const attrField = findAttrField(item) || 'attributes';
+            return {
+              id,
+              def_index: item.def_index || item.DefIndex || '0',
+              quality: item.quality || item.Quality || '0',
+              rarity: item.rarity || item.Rarity || '0',
+              attributes: item[attrField] || {},
+              raw: item,
+            };
+          });
         if (state.items.length === 0) { showToast('Предметов не найдено'); return; }
         state.inventorySkins = state.items.map(item => {
           const pk = (item.attributes['6'] || '').trim();
@@ -1439,14 +1476,12 @@
       if (state.isSpinning) return;
       if (!state.selectedSourceId || !state.selectedTargetSkin) return;
 
-      // Фиксируем режим бога на момент старта — чтобы исключить смену в процессе
       const godModeAtSpin = state.godMode;
 
       state.isSpinning = true;
       spinBtn.disabled = true;
       spinBtn.textContent = 'Крутится...';
 
-      // Блокируем тоггл режима бога и все кнопки выбора/множителей
       godToggle.classList.add('locked');
       document.querySelectorAll('.mult-btn').forEach(b => {
         b.style.pointerEvents = 'none';
@@ -1477,7 +1512,6 @@
         state.isSpinning = false;
         spinBtn.textContent = '⚡ Прокачать';
 
-        // Разблокировка
         godToggle.classList.remove('locked');
         document.querySelectorAll('.mult-btn').forEach(b => {
           b.style.pointerEvents = '';
@@ -1506,9 +1540,9 @@
                 raw.def_index = STICKER_ITEM_DEF_INDEX;
                 raw.quality = '4';
                 raw.rarity = '4';
-                if (!raw.attribute) raw.attribute = {};
-                raw.attribute[STICKER_KIT_ATTR] = target.sticker_index;
-                raw.attribute['114'] = '0';
+                /* Записываем в правильное поле — то, что реально есть в raw */
+                setRawAttr(raw, STICKER_KIT_ATTR, target.sticker_index);
+                setRawAttr(raw, '114', '0');
               }
               const idx2 = state.inventorySkins.findIndex(i => i.id === old.id);
               if (idx2 !== -1) state.inventorySkins[idx2] = { ...newItem, skin: target };
@@ -1521,9 +1555,9 @@
               state.items[itemIndex] = newItem;
               if (raw) {
                 raw.def_index = target.def_index;
-                if (!raw.attribute) raw.attribute = {};
-                raw.attribute['6'] = target.paint_index;
-                raw.attribute['8'] = '0.000000';
+                /* Записываем в правильное поле — то, что реально есть в raw */
+                setRawAttr(raw, '6', target.paint_index);
+                setRawAttr(raw, '8', '0.000000');
               }
               const idx2 = state.inventorySkins.findIndex(i => i.id === old.id);
               if (idx2 !== -1) state.inventorySkins[idx2] = { ...newItem, skin: target };
@@ -1531,7 +1565,6 @@
           }
           showResultModal(true, target, false);
         } else {
-          // Используем зафиксированное состояние
           if (godModeAtSpin) {
             showResultModal(false, null, true);
           } else {
@@ -1560,36 +1593,59 @@
       }, 4200);
     });
 
+    let resultPopupTimer = null;
+
     function showResultModal(win, target, savedByGod) {
-      resultModal.style.display = 'grid';
+      resultPopup.classList.remove('result-popup--win', 'result-popup--lose', 'result-popup--god');
+
       if (win) {
-        resultModalContent.innerHTML = `
-          <div style="font-size:48px;margin-bottom:16px;">🎉</div>
-          <h3 style="color:#8dffb9;font-size:24px;font-weight:900;margin-bottom:8px;">УСПЕХ!</h3>
-          <p style="color:var(--csgo-text-muted);font-size:13px;margin-bottom:16px;">Вы получили</p>
-          <img src="${target.image}" alt="" style="width:200px;height:130px;object-fit:contain;margin:0 auto 12px;display:block;">
-          <p style="font-size:16px;font-weight:700;color:#fff;">${escapeHtml(target.name)}</p>
-          <button class="btn btn--primary" onclick="closeResultModal()" style="margin-top:20px;width:100%;">Продолжить</button>
+        resultPopup.classList.add('result-popup--win');
+        resultPopupContent.innerHTML = `
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:36px;flex-shrink:0;">🎉</div>
+            <img src="${target.image}" alt="" style="width:80px;height:60px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'">
+            <div style="flex:1;min-width:0;">
+              <div style="color:#8dffb9;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Успех!</div>
+              <div style="color:#e0dbd0;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(target.name)}</div>
+            </div>
+          </div>
         `;
       } else if (savedByGod) {
-        resultModalContent.innerHTML = `
-          <div style="font-size:48px;margin-bottom:16px;">🛡️</div>
-          <h3 style="color:#f0b040;font-size:24px;font-weight:900;margin-bottom:8px;">РЕЖИМ БОГА</h3>
-          <p style="color:var(--csgo-text-muted);font-size:13px;margin-bottom:24px;">Апгрейд не удался, но предмет остался в инвентаре.<br><span style="color:#f0b040;">Не забудьте выключить режим, чтобы сохранить файл.</span></p>
-          <button class="btn btn--primary" onclick="closeResultModal()" style="width:100%;">Продолжить</button>
+        resultPopup.classList.add('result-popup--god');
+        resultPopupContent.innerHTML = `
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:36px;flex-shrink:0;">🛡️</div>
+            <div style="flex:1;min-width:0;">
+              <div style="color:#c39bd3;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Режим бога</div>
+              <div style="color:var(--csgo-text-muted);font-size:12px;">Предмет остался в инвентаре</div>
+            </div>
+          </div>
         `;
       } else {
-        resultModalContent.innerHTML = `
-          <div style="font-size:48px;margin-bottom:16px;">💀</div>
-          <h3 style="color:#ff8b8b;font-size:24px;font-weight:900;margin-bottom:8px;">ПРОВАЛ</h3>
-          <p style="color:var(--csgo-text-muted);font-size:13px;margin-bottom:24px;">Ваш предмет был потерян</p>
-          <button class="btn btn--primary" onclick="closeResultModal()" style="width:100%;">Продолжить</button>
+        resultPopup.classList.add('result-popup--lose');
+        resultPopupContent.innerHTML = `
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:36px;flex-shrink:0;">💀</div>
+            <div style="flex:1;min-width:0;">
+              <div style="color:#ff8b8b;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Провал</div>
+              <div style="color:var(--csgo-text-muted);font-size:12px;">Предмет потерян</div>
+            </div>
+          </div>
         `;
       }
+
+      resultPopup.classList.add('visible');
+
+      clearTimeout(resultPopupTimer);
+      resultPopupTimer = setTimeout(() => {
+        resultPopup.classList.remove('visible');
+      }, 4500);
     }
 
-    function closeResultModal() { resultModal.style.display = 'none'; }
-    resultModal.addEventListener('click', e => { if (e.target === resultModal) closeResultModal(); });
+    function closeResultModal() {
+      clearTimeout(resultPopupTimer);
+      resultPopup.classList.remove('visible');
+    }
 
     function saveInventory() {
       if (state.godMode) {
