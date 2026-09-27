@@ -215,7 +215,6 @@
       position: relative; width: 280px; height: 280px; margin-bottom: 20px;
       flex-shrink: 0;
     }
-    /* Статичное колесо-подложка */
     #view-upgrader .wheel-spinner {
       position: absolute;
       inset: 0;
@@ -237,7 +236,6 @@
       color: var(--csgo-text-muted); margin-top: 4px;
     }
 
-    /* Крутящаяся стрелка: pivot в центре колеса */
     #view-upgrader .wheel-pointer {
       position: absolute;
       top: 50%;
@@ -313,6 +311,79 @@
       border-color: var(--csgo-accent); color: #0c0a06;
       background: var(--csgo-accent); box-shadow: 0 0 16px rgba(224,148,40,0.4);
     }
+
+    #view-upgrader .god-toggle {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      color: var(--csgo-text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: all .2s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+      user-select: none;
+      position: relative;
+    }
+    #view-upgrader .god-toggle:hover {
+      border-color: rgba(224,148,40,0.5);
+      color: #e0dbd0;
+    }
+    #view-upgrader .god-toggle__indicator {
+      width: 14px;
+      height: 14px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.4);
+      transition: all .2s ease;
+      position: relative;
+    }
+    #view-upgrader .god-toggle__indicator::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: transparent;
+      transition: all .2s ease;
+    }
+    #view-upgrader .god-toggle.active {
+      border-color: #f0b040;
+      color: #f0b040;
+      background: rgba(224,148,40,0.1);
+      box-shadow: 0 0 16px rgba(224,148,40,0.35);
+    }
+    #view-upgrader .god-toggle.active .god-toggle__indicator {
+      border-color: #f0b040;
+    }
+    #view-upgrader .god-toggle.active .god-toggle__indicator::after {
+      background: #f0b040;
+      box-shadow: 0 0 8px #f0b040;
+    }
+    /* Заблокированный во время прокрутки */
+    #view-upgrader .god-toggle.locked {
+      pointer-events: none;
+      opacity: 0.4;
+      cursor: not-allowed;
+      filter: grayscale(0.4);
+    }
+    #view-upgrader .god-toggle.locked::after {
+      content: 'во время прокрутки';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      color: #f0b040;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+      opacity: 0.8;
+    }
+
     #view-upgrader .spin-btn {
       margin-top: 18px; width: 100%; max-width: 400px;
       padding: 15px 24px; font-size: 16px; font-weight: 900;
@@ -567,7 +638,6 @@
         <div class="upgrade-column">
           <div class="upgrade-title">🎰 Upgrader</div>
           <div class="wheel-wrapper">
-            <!-- Статичное колесо-подложка -->
             <div class="wheel-spinner">
               <svg class="wheel-svg" viewBox="0 0 200 200">
                 <circle class="wheel-bg" cx="100" cy="100" r="88"></circle>
@@ -575,7 +645,6 @@
                         transform="rotate(-90 100 100)" stroke-dasharray="0 552.92"></circle>
               </svg>
             </div>
-            <!-- Крутящаяся стрелка -->
             <div class="wheel-pointer" id="wheelPointer"></div>
             <div class="wheel-center">
               <div class="wheel-percent" id="wheelPercent">50%</div>
@@ -607,6 +676,11 @@
             <button class="mult-btn" data-mult="64">x64</button>
           </div>
 
+          <div class="god-toggle" id="godToggle" onclick="toggleGodMode()" title="При провале предмет не пропадёт, но нельзя будет сохранить inventory.txt">
+            <div class="god-toggle__indicator"></div>
+            <span>⚡ Режим бога</span>
+          </div>
+
           <button class="spin-btn" id="spinBtn" disabled>⚡ Прокачать</button>
         </div>
 
@@ -620,7 +694,8 @@
           </div>
           <div class="target-list" id="targetList"></div>
           <div style="padding:8px;border-top:1px solid rgba(188,160,88,.3);flex-shrink:0;">
-            <button class="btn btn--ghost" style="width:100%;" onclick="saveInventory()">💾 Сохранить inventory.txt</button>
+            <button class="btn btn--ghost" style="width:100%;" id="saveBtn" onclick="saveInventory()">💾 Сохранить inventory.txt</button>
+            <div id="saveWarning" style="display:none;margin-top:6px;font-size:10px;color:#f0b040;text-align:center;text-transform:uppercase;letter-spacing:.1em;">⚠ Режим бога: сохранение недоступно</div>
           </div>
         </div>
       </div>
@@ -1006,6 +1081,7 @@
       selectedSourceId: null, selectedTargetSkin: null,
       multiplier: 2, isSpinning: false,
       originalFilename: null,
+      godMode: false,
     };
 
     const uploadScreen = document.getElementById('upgraderUploadScreen');
@@ -1030,6 +1106,39 @@
     const sourceModalSearch = document.getElementById('sourceModalSearch');
     const resultModal = document.getElementById('resultModal');
     const resultModalContent = document.getElementById('resultModalContent');
+    const godToggle = document.getElementById('godToggle');
+    const saveBtn = document.getElementById('saveBtn');
+    const saveWarning = document.getElementById('saveWarning');
+
+    function toggleGodMode() {
+      // Блокировка во время прокрутки
+      if (state.isSpinning) {
+        showToast('⏳ Подождите завершения прокрутки');
+        return;
+      }
+      state.godMode = !state.godMode;
+      godToggle.classList.toggle('active', state.godMode);
+      if (state.godMode) {
+        showToast('⚡ Режим бога включён: провал не удалит предмет, сохранение заблокировано');
+      } else {
+        showToast('Режим бога выключен');
+      }
+      updateSaveBtn();
+    }
+
+    function updateSaveBtn() {
+      if (state.godMode) {
+        saveBtn.setAttribute('disabled', 'disabled');
+        saveBtn.style.opacity = '0.4';
+        saveBtn.style.cursor = 'not-allowed';
+        saveWarning.style.display = 'block';
+      } else {
+        saveBtn.removeAttribute('disabled');
+        saveBtn.style.opacity = '';
+        saveBtn.style.cursor = '';
+        saveWarning.style.display = 'none';
+      }
+    }
 
     uploadZone.addEventListener('click', () => fileInput.click());
     uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
@@ -1092,6 +1201,7 @@
         renderInventory();
         renderTargetList('');
         updateWheel();
+        updateSaveBtn();
         showToast(`Загружено ${state.items.length} предметов`);
 
         if (!SKINS_LOADED) {
@@ -1329,17 +1439,26 @@
       if (state.isSpinning) return;
       if (!state.selectedSourceId || !state.selectedTargetSkin) return;
 
+      // Фиксируем режим бога на момент старта — чтобы исключить смену в процессе
+      const godModeAtSpin = state.godMode;
+
       state.isSpinning = true;
       spinBtn.disabled = true;
       spinBtn.textContent = 'Крутится...';
+
+      // Блокируем тоггл режима бога и все кнопки выбора/множителей
+      godToggle.classList.add('locked');
+      document.querySelectorAll('.mult-btn').forEach(b => {
+        b.style.pointerEvents = 'none';
+        b.style.opacity = '0.5';
+      });
+      sourceSlot.style.pointerEvents = 'none';
+      targetSlot.style.pointerEvents = 'none';
 
       const chance = computeChance();
       const chanceDeg = (chance / 100) * 360;
       const win = Math.random() * 100 < chance;
 
-      // Оранжевая зона идёт от 12 часов по часовой до chanceDeg.
-      // Стрелка в начальном положении (0°) смотрит на 12 часов.
-      // Значит: win → 0..chanceDeg, lose → chanceDeg..360
       let baseRot;
       if (win) {
         baseRot = Math.random() * chanceDeg;
@@ -1348,7 +1467,6 @@
       }
       const totalDeg = 1440 + baseRot;
 
-      // Крутим стрелку
       wheelPointer.style.transition = 'none';
       wheelPointer.style.transform = 'rotate(0deg)';
       void wheelPointer.offsetWidth;
@@ -1358,6 +1476,15 @@
       setTimeout(() => {
         state.isSpinning = false;
         spinBtn.textContent = '⚡ Прокачать';
+
+        // Разблокировка
+        godToggle.classList.remove('locked');
+        document.querySelectorAll('.mult-btn').forEach(b => {
+          b.style.pointerEvents = '';
+          b.style.opacity = '';
+        });
+        sourceSlot.style.pointerEvents = '';
+        targetSlot.style.pointerEvents = '';
 
         if (win) {
           const target = state.selectedTargetSkin;
@@ -1402,19 +1529,23 @@
               if (idx2 !== -1) state.inventorySkins[idx2] = { ...newItem, skin: target };
             }
           }
-          showResultModal(true, target);
+          showResultModal(true, target, false);
         } else {
-          const itemIndex = state.items.findIndex(i => i.id === state.selectedSourceId);
-          if (itemIndex !== -1) {
-            const removed = state.items.splice(itemIndex, 1)[0];
-            delete state.itemsMap[removed.id];
-            const idx2 = state.inventorySkins.findIndex(i => i.id === removed.id);
-            if (idx2 !== -1) state.inventorySkins.splice(idx2, 1);
+          // Используем зафиксированное состояние
+          if (godModeAtSpin) {
+            showResultModal(false, null, true);
+          } else {
+            const itemIndex = state.items.findIndex(i => i.id === state.selectedSourceId);
+            if (itemIndex !== -1) {
+              const removed = state.items.splice(itemIndex, 1)[0];
+              delete state.itemsMap[removed.id];
+              const idx2 = state.inventorySkins.findIndex(i => i.id === removed.id);
+              if (idx2 !== -1) state.inventorySkins.splice(idx2, 1);
+            }
+            showResultModal(false, null, false);
           }
-          showResultModal(false, null);
         }
 
-        // Сброс стрелки
         wheelPointer.style.transition = 'none';
         wheelPointer.style.transform = 'rotate(0deg)';
 
@@ -1429,7 +1560,7 @@
       }, 4200);
     });
 
-    function showResultModal(win, target) {
+    function showResultModal(win, target, savedByGod) {
       resultModal.style.display = 'grid';
       if (win) {
         resultModalContent.innerHTML = `
@@ -1439,6 +1570,13 @@
           <img src="${target.image}" alt="" style="width:200px;height:130px;object-fit:contain;margin:0 auto 12px;display:block;">
           <p style="font-size:16px;font-weight:700;color:#fff;">${escapeHtml(target.name)}</p>
           <button class="btn btn--primary" onclick="closeResultModal()" style="margin-top:20px;width:100%;">Продолжить</button>
+        `;
+      } else if (savedByGod) {
+        resultModalContent.innerHTML = `
+          <div style="font-size:48px;margin-bottom:16px;">🛡️</div>
+          <h3 style="color:#f0b040;font-size:24px;font-weight:900;margin-bottom:8px;">РЕЖИМ БОГА</h3>
+          <p style="color:var(--csgo-text-muted);font-size:13px;margin-bottom:24px;">Апгрейд не удался, но предмет остался в инвентаре.<br><span style="color:#f0b040;">Не забудьте выключить режим, чтобы сохранить файл.</span></p>
+          <button class="btn btn--primary" onclick="closeResultModal()" style="width:100%;">Продолжить</button>
         `;
       } else {
         resultModalContent.innerHTML = `
@@ -1454,6 +1592,10 @@
     resultModal.addEventListener('click', e => { if (e.target === resultModal) closeResultModal(); });
 
     function saveInventory() {
+      if (state.godMode) {
+        showToast('⚠ Режим бога: сохранение заблокировано. Выключите режим, чтобы сохранить файл.');
+        return;
+      }
       if (!state.kvData) { showToast('Сначала загрузите inventory.txt'); return; }
       try {
         const text = serializeKV(state.kvData);
@@ -1472,7 +1614,12 @@
 
     document.addEventListener('keydown', e => {
       if (e.key === 's' && (e.ctrlKey || e.metaKey) && document.body.classList.contains('upgrader-mode')) {
-        e.preventDefault(); saveInventory();
+        e.preventDefault();
+        if (state.godMode) {
+          showToast('⚠ Режим бога: сохранение заблокировано');
+          return;
+        }
+        saveInventory();
       }
     });
 
