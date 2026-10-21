@@ -51,12 +51,9 @@ html { scroll-behavior: smooth; }
 .icon-img { width: 100%; height: 100%; object-fit: contain; }
 .icon-wrapper { display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-/* Steam кнопка */
 .steam-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border-radius: 8px; font-weight: 700; font-size: 13px; background: linear-gradient(180deg, #1b2838, #171a21); color: #c7d5e0; border: 1px solid rgba(102,192,244,0.35); cursor: pointer; transition: all 0.2s ease; text-decoration: none; white-space: nowrap; }
 .steam-btn:hover { background: linear-gradient(180deg, #2a475e, #1b2838); border-color: rgba(102,192,244,0.7); color: #fff; box-shadow: 0 0 20px rgba(102,192,244,0.3); transform: translateY(-1px); }
 .steam-btn img { width: 18px; height: 18px; display: block; }
-
-/* Валюта */
 .coin-display { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; background: linear-gradient(180deg, rgba(155,89,182,0.15), rgba(155,89,182,0.05)); border: 1px solid rgba(155,89,182,0.45); color: #fff; font-weight: 800; font-size: 13px; white-space: nowrap; box-shadow: 0 0 16px rgba(155,89,182,0.25), inset 0 0 12px rgba(155,89,182,0.1); transition: all 0.25s ease; cursor: default; }
 .coin-display:hover { box-shadow: 0 0 26px rgba(155,89,182,0.5); border-color: rgba(195,155,211,0.75); }
 .coin-display__icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f0d9ff, #9b59b6 60%, #5b2a72); box-shadow: 0 0 10px rgba(195,155,211,0.8), inset 0 -2px 4px rgba(0,0,0,0.4); font-size: 11px; color: #fff; font-weight: 900; }
@@ -67,7 +64,6 @@ html { scroll-behavior: smooth; }
 .coin-float { position: fixed; font-family: 'Rajdhani', sans-serif; font-weight: 900; color: #c39bd3; font-size: 18px; pointer-events: none; z-index: 500; text-shadow: 0 0 12px rgba(155,89,182,0.9), 0 2px 4px rgba(0,0,0,0.6); animation: coinFloat 1.2s ease-out forwards; }
 @keyframes coinFloat { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-60px); opacity: 0; } }
 
-/* Модалка тех. работ */
 .techworks-overlay { position: fixed; inset: 0; background: rgba(4,6,12,0.85); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 16px; }
 .techworks-overlay.open { display: flex; }
 .techworks-modal { max-width: 420px; width: 100%; background: #0f141b; border: 1px solid rgba(102,192,244,0.4); border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8); animation: techworksIn 0.3s cubic-bezier(0.17,0.67,0.12,0.99); }
@@ -78,7 +74,48 @@ html { scroll-behavior: smooth; }
 .techworks-modal p { font-size: 14px; color: #8a93a8; line-height: 1.5; margin: 0 0 20px; }
 .techworks-modal button { background: linear-gradient(180deg, #66c0f4, #417a9b); border: none; color: #0b0e14; padding: 10px 32px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; text-transform: uppercase; }
 
-/* UPGRADER */
+.game-servers-section { max-width: 1200px; margin: 0 auto; padding: 60px 16px 20px; }
+.servers-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; gap: 16px; }
+.servers-stats { display: flex; gap: 32px; }
+.stat-block { display: flex; flex-direction: column; align-items: flex-end; }
+.stat-value { font-size: 20px; font-weight: 800; color: #9b59b6; line-height: 1; }
+.stat-label { font-size: 11px; text-transform: uppercase; color: #8a93a8; letter-spacing: 0.05em; margin-top: 4px; }
+.servers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.server-card { background: #141210; border: 1px solid #2a2520; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+.server-card:hover { transform: translateY(-4px); border-color: #4a4030; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+.server-map-img { position: relative; height: 180px; background-size: cover; background-position: center; background-color: #1a1815; }
+.server-map-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #141210 0%, rgba(20,18,16,0.3) 50%, rgba(0,0,0,0.7) 100%); }
+.server-badges { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
+.badge-online { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; color: #fff; }
+.badge-online .dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; display: inline-block; }
+.badge-info { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); text-shadow: 0 1px 3px #000; }
+.server-map-info { position: absolute; bottom: 12px; left: 16px; z-index: 2; }
+.map-name { font-size: 22px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); letter-spacing: -0.5px; }
+.server-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+.server-title { font-size: 16px; font-weight: 800; color: #e5e5e5; margin: 0 0 12px 0; }
+.server-mode-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.server-mode { font-size: 12px; color: #8a93a8; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.server-players { font-size: 12px; color: #8a93a8; font-weight: 600; }
+.server-players b { color: #ffffff; font-weight: 800; font-size: 14px; }
+.server-warmup { font-size: 11px; color: #9b59b6; font-weight: 600; margin-bottom: 16px; }
+.ip-box { background: #0c0b09; border: 1px solid #2a2520; border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 12px; transition: background 0.2s, border-color 0.2s; }
+.ip-box:hover, .ip-box:active { background: #1a1815; border-color: #4a4030; }
+.ip-text { font-family: 'Rajdhani', monospace; font-size: 13px; font-weight: 700; color: #d1cdc4; user-select: all; }
+.copy-icon { color: #9b59b6; opacity: 0.8; transition: opacity 0.2s, transform 0.2s; flex-shrink: 0; }
+.ip-box:hover .copy-icon { opacity: 1; transform: scale(1.1); }
+.connect-btn { display: block; width: 100%; background: #9b59b6; color: #ffffff; text-align: center; font-weight: 800; font-size: 13px; padding: 12px; border-radius: 6px; text-decoration: none; transition: background 0.2s, transform 0.1s; margin-top: auto; border: none; cursor: pointer; }
+.connect-btn:hover { background: #af7ac5; }
+.connect-btn:active { transform: scale(0.98); }
+.match-history { display: block; text-align: center; font-size: 12px; color: #8a93a8; text-decoration: none; margin-top: 12px; transition: color 0.2s; font-weight: 600; cursor: pointer; }
+.match-history:hover { color: #fff; }
+
+@media (max-width: 600px) {
+  .servers-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .servers-stats { width: 100%; justify-content: flex-start; gap: 32px; }
+  .stat-block { align-items: flex-start; }
+  .server-map-img { height: 160px; }
+}
+
 #view-upgrader { font-family: 'Rajdhani','Barlow Condensed',sans-serif; --csgo-panel-bg-strong: rgba(6,9,13,.97); --csgo-border: rgba(155,89,182,.42); --csgo-accent: #9b59b6; --csgo-accent-light: #c39bd3; --csgo-text-muted: rgba(190,183,168,.72); color: #d8d4cc; display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
 body.upgrader-mode { height: 100vh; overflow: hidden; }
 body.upgrader-mode #view-upgrader { min-height: 0; }
@@ -113,16 +150,13 @@ body.upgrader-mode .disclaimer-bar { display: none; }
 #view-upgrader .shop-card__buy { flex-shrink: 0; padding: 6px 10px; border-radius: 6px; background: linear-gradient(180deg, rgba(155,89,182,0.9), rgba(125,60,152,0.9)); color: #fff; font-weight: 800; font-size: 11px; border: 1px solid rgba(195,155,211,0.5); white-space: nowrap; }
 #view-upgrader .shop-card__buy:hover { background: linear-gradient(180deg, #af7ac5, #9b59b6); }
 #view-upgrader .shop-card__buy.insufficient { background: rgba(255,255,255,0.05); color: #ff8b8b; border-color: rgba(255,139,139,0.3); cursor: not-allowed; }
-
 #view-upgrader .target-tabs { display: flex; border-bottom: 1px solid rgba(155,89,182,.3); flex-shrink: 0; }
 #view-upgrader .target-tabs button { flex: 1; padding: 10px 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--csgo-text-muted); background: rgba(0,0,0,0.3); border-bottom: 2px solid transparent; transition: all .2s ease; }
 #view-upgrader .target-tabs button:hover { color: #e0dbd0; }
 #view-upgrader .target-tabs button.active { color: #fff; background: rgba(155,89,182,0.15); border-bottom-color: var(--csgo-accent); }
-
 #view-upgrader .shop-filters { display: flex; gap: 4px; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
 #view-upgrader .shop-filters button { flex: 1; padding: 6px 4px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--csgo-text-muted); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; transition: all .2s; }
 #view-upgrader .shop-filters button.active { color: #fff; background: rgba(155,89,182,0.25); border-color: var(--csgo-accent); }
-
 #view-upgrader .rewards-panel { flex: 1; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 10px; }
 #view-upgrader .reward-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 #view-upgrader .reward-card.discord-accent { border-color: rgba(88,101,242,0.35); background: linear-gradient(180deg, rgba(88,101,242,0.06), rgba(88,101,242,0.01)); }
@@ -139,7 +173,6 @@ body.upgrader-mode .disclaimer-bar { display: none; }
 #view-upgrader .quest-progress { height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
 #view-upgrader .quest-progress-bar { height: 100%; background: linear-gradient(90deg, #9b59b6, #c39bd3); box-shadow: 0 0 12px rgba(155,89,182,0.6); transition: width .4s ease; }
 #view-upgrader .quest-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--csgo-text-muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
-
 #view-upgrader .upgrade-column { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 0; position: relative; overflow-y: auto; padding: 8px; }
 #view-upgrader .upgrade-title { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; color: var(--csgo-accent-light); text-shadow: 0 0 20px rgba(155,89,182,0.5); margin-bottom: 20px; flex-shrink: 0; }
 #view-upgrader .wheel-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 20px; flex-shrink: 0; }
@@ -209,12 +242,12 @@ body.upgrader-mode .disclaimer-bar { display: none; }
     <nav class="hidden md:flex items-center gap-1">
       <a class="btn-csgo text-sm nav-item" data-nav="main" href="#" onclick="switchView('main');return false;">Главная</a>
       <a class="btn-csgo text-sm nav-item" data-nav="main" href="#news" onclick="switchView('main');setTimeout(()=>document.getElementById('news').scrollIntoView({behavior:'smooth'}),50);return false;">Новости</a>
-      <a class="btn-csgo text-sm nav-item" data-nav="main" href="#developers" onclick="switchView('main');setTimeout(()=>document.getElementById('developers').scrollIntoView({behavior:'smooth'}),50);return false;">Разработчики</a>
+      <a class="btn-csgo text-sm nav-item" data-nav="main" href="#servers" onclick="switchView('main');setTimeout(()=>document.getElementById('servers').scrollIntoView({behavior:'smooth'}),50);return false;">Сервера</a>
       <a class="btn-csgo text-sm nav-item" data-nav="upgrader" href="#" onclick="switchView('upgrader');return false;" id="navUpgrader">🎰 Апгрейдер</a>
       <a class="btn-csgo text-sm" href="https://drive.google.com/file/d/1Ht7eGsUTvgTqBLrOgdejG_Bu_W4TZKP9/view?usp=drivesdk" target="_blank">Скачать</a>
       <a class="btn-csgo text-sm !border-purple/40 !text-purple hover:!bg-purple/10" href="https://dalink.to/s1veexz" target="_blank">Donation</a>
 
-      <div class="coin-display" id="coinDisplay" title="Burmalda Coins — внутренняя валюта сайта">
+      <div class="coin-display" id="coinDisplay" title="Burmalda Coins">
         <div class="coin-display__icon">₿</div>
         <div style="display:flex;flex-direction:column;line-height:1;">
           <span class="coin-display__value" id="coinValue">0</span>
@@ -223,7 +256,7 @@ body.upgrader-mode .disclaimer-bar { display: none; }
       </div>
 
       <button class="steam-btn" onclick="openSteamLogin()">
-        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20220611141426" alt="Steam">
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/960px-Steam_icon_logo.svg.png" alt="Steam">
         <span>Steam</span>
       </button>
     </nav>
@@ -239,13 +272,13 @@ body.upgrader-mode .disclaimer-bar { display: none; }
         <div class="absolute bottom-0 right-1/3 h-[400px] w-[400px] translate-y-1/2 rounded-full bg-purple/5 blur-[100px]"></div>
       </div>
       <div class="relative mx-auto max-w-7xl px-4 py-20 sm:py-28 lg:py-36">
-        <div class="flex flex-col items-center text-center animate-on-scroll visible">
+        <div class="flex flex-col items-center text-center">
           <div class="mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-purple/10 border border-purple/20 shadow-lg glow-purple overflow-hidden">
             <img src="https://images.cybersport.ru/images/quote-author/plain/f0/f0f4eca4-b2dd-448e-815c-05c684d420f9.png" alt="BurmaldaClient" class="h-16 w-16 object-contain">
           </div>
           <h1 class="mb-4 text-5xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight">Burmalda <span class="gradient-text">Client</span></h1>
           <p class="mb-3 text-lg sm:text-xl text-[#8a93a8] font-bold uppercase tracking-[0.2em]">Ностальгический мод для CS:GO</p>
-          <p class="mb-8 max-w-2xl text-sm sm:text-base text-[#8a93a8]/70 leading-relaxed">Верните легендарную атмосферу культового шутера. Наш эмулятор полностью воспроизводит сетевую инфраструктуру CS:GO — от поиска соперников до системы прогрессии. Наслаждайтесь классическим геймплеем, участвуйте в операциях, получайте награды.</p>
+          <p class="mb-8 max-w-2xl text-sm sm:text-base text-[#8a93a8]/70 leading-relaxed">Верните легендарную атмосферу культового шутера. Наш эмулятор полностью воспроизводит сетевую инфраструктуру CS:GO.</p>
           <div class="flex flex-wrap items-center justify-center gap-3">
             <a class="btn-csgo btn-csgo-primary px-8 py-3.5 text-sm font-bold uppercase tracking-wide flex items-center gap-2 rounded-xl" href="https://drive.google.com/file/d/1Ht7eGsUTvgTqBLrOgdejG_Bu_W4TZKP9/view?usp=drivesdk" target="_blank">Скачать клиент</a>
             <button class="btn-csgo px-6 py-3.5 text-sm font-bold uppercase tracking-wide flex items-center gap-2 !border-purple/40 !text-purple hover:!bg-purple/10 rounded-xl" onclick="switchView('upgrader')">🎰 Апгрейдер скинов</button>
@@ -258,11 +291,107 @@ body.upgrader-mode .disclaimer-bar { display: none; }
       </div>
     </section>
 
+    <section id="servers" class="game-servers-section">
+      <div class="servers-header animate-on-scroll">
+        <div class="flex items-center gap-3">
+          <span class="h-6 w-1 bg-purple rounded-full"></span>
+          <h2 class="text-xl font-black uppercase italic tracking-wide text-white m-0">Game servers</h2>
+        </div>
+        <div class="servers-stats">
+          <div class="stat-block">
+            <span class="stat-value" id="servers-online">3 / 3</span>
+            <span class="stat-label">Online</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-value" id="servers-players">0</span>
+            <span class="stat-label">Players</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="servers-grid">
+        <div class="server-card animate-on-scroll delay-100">
+          <div class="server-map-img" style="background-image: url('https://images.steamusercontent.com/ugc/1697279438781626114/7AFBA2128C28D3303773F1DBBAE6975D57603F18/');">
+            <div class="server-map-overlay"></div>
+            <div class="server-badges">
+              <div class="badge-online"><span class="dot"></span> Online</div>
+              <div class="badge-info">RU · 128 tick</div>
+            </div>
+            <div class="server-map-info"><div class="map-name">No map</div></div>
+          </div>
+          <div class="server-body">
+            <h3 class="server-title">Premier Mode</h3>
+            <div class="server-mode-row">
+              <span class="server-mode">Premier 5v5</span>
+              <span class="server-players"><b id="players-1">0</b> / 10 players</span>
+            </div>
+            <div class="server-warmup">1x1 warmup</div>
+            <div class="ip-box" onclick="copyIP('connect 82.208.123.206:27064', this)">
+              <span class="ip-text">connect 82.208.123.206:27064</span>
+              <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </div>
+            <a href="steam://connect/82.208.123.206:27064" class="connect-btn">Connect via Steam ↗</a>
+            <a class="match-history" onclick="openSteamLogin()">Match history →</a>
+          </div>
+        </div>
+
+        <div class="server-card animate-on-scroll delay-200">
+          <div class="server-map-img" style="background-image: url('https://yandex-images.clstorage.net/4KBkn8269/11db7fy38/tgqRkR5nheZBo9eC4_-u7foTIJEJRaBblunCWZqn5WA73cryTQi8Lyk4Mha_qvqDixF06hyiPe9SFkqDLcslhfMfwJh_aoHqUYeeppO2oq3OJiyhUAyYSquh6lmD5kWEs1wbXvSkFKbpjE93z7Ont_9JJXLpu0QD9iu3D9nuSAgiap1dghfY1jGbSjanZx7p1hacsTEsFObiUbO8Ump1GJ8IQ_p83PACkXAvW8svu24vQfmGzB_Aoz4XQ8918iCQ2s49hYrn6AbhAzICI0OqZdZ6zG290IQ-1iVfYBqKKXDfbMeyDKxgXsEkG2-nuwOG69HVigT70Acaw9uztfJIcApW3Rn-B8wOLavOhhsTRiky4hAVlYTEtiJ5g2Ribp0878SflvjkNLbVIL8Xp5sPEs-F-RL0F5zLCi9nP-kiHPBuggVl0qMUOhW_VmZLk3IxRk4MwSX0wDbSWfMg8hItNFNcq7L4UAwKragLF0MbP1qf3TmeRHMwO_YX2-8JKsDklp6FRaonlHYtY7oeQ7vSnV4WVH2poAgWog1vjKJ-BbzTxCd6BMyENpWkLxfTg6sCc9F1ihC_nEfOE8_7tRrIVPLqGWUO92RWRT9WMot3Au1KUoThRSzIqnaFM_QWyqnMm0irYuS4BJaJgP83twujMi8ZXWbII3DLGhufZxGaOKQ62hFZJs_EvhWDRl4fYw6Z9hZw7dUIAHrOJRPo-ooZaIs43-p4pKRefTjvv08Tv76LadEmpPe4R5pPG2_14qzElrL1dbKP0HJp-7ayZ1eKFdpmVHVRGJjeJpnvgPZCLWg_-MtiEFh04uXUbyNbOx-W6wXtAoQjlFP-T9sXHSooTC4ODRGWk4SaJfP6Au_TOuHCPvgJOahEWi4B65guctF0k-jPvgBwCAopYIfPPytn0otlzTJ8-3gT_kMvT92-PAxy4qmpMveA6uUDOrZPo5qZvtas_XV8fCLGWVeE6jIs');">
+            <div class="server-map-overlay"></div>
+            <div class="server-badges">
+              <div class="badge-online"><span class="dot"></span> Online</div>
+              <div class="badge-info">RU · 128 tick</div>
+            </div>
+            <div class="server-map-info"><div class="map-name">Safehouse</div></div>
+          </div>
+          <div class="server-body">
+            <h3 class="server-title">Deathmatch</h3>
+            <div class="server-mode-row">
+              <span class="server-mode">DM FFA</span>
+              <span class="server-players"><b id="players-2">0</b> / 16 players</span>
+            </div>
+            <div class="server-warmup">No warmup</div>
+            <div class="ip-box" onclick="copyIP('connect 77.110.192.49:27015', this)">
+              <span class="ip-text">connect 77.110.192.49:27015</span>
+              <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </div>
+            <a href="steam://connect/77.110.192.49:27015" class="connect-btn">Connect via Steam ↗</a>
+            <a class="match-history" onclick="openSteamLogin()">Match history →</a>
+          </div>
+        </div>
+
+        <div class="server-card animate-on-scroll delay-300">
+          <div class="server-map-img" style="background-image: url('https://vkplay.ru/pre_0x736_resize/hotbox/content_files/Stories/2023/04/24/417c427279934ef8a96a7268ad44fa03.jpg?quality=85');">
+            <div class="server-map-overlay"></div>
+            <div class="server-badges">
+              <div class="badge-online"><span class="dot"></span> Online</div>
+              <div class="badge-info">RU · 128 tick</div>
+            </div>
+            <div class="server-map-info"><div class="map-name">Mirage</div></div>
+          </div>
+          <div class="server-body">
+            <h3 class="server-title">Normal Mode</h3>
+            <div class="server-mode-row">
+              <span class="server-mode">Competitive 5v5</span>
+              <span class="server-players"><b id="players-3">0</b> / 10 players</span>
+            </div>
+            <div class="server-warmup">1x1 warmup</div>
+            <div class="ip-box" onclick="copyIP('connect 37.230.228.146:27060', this)">
+              <span class="ip-text">connect 37.230.228.146:27060</span>
+              <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </div>
+            <a href="steam://connect/37.230.228.146:27060" class="connect-btn">Connect via Steam ↗</a>
+            <a class="match-history" onclick="openSteamLogin()">Match history →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="news" class="border-b border-white/5 bg-[#0d1018]/50 py-16">
       <div class="mx-auto max-w-7xl px-4">
         <div class="mb-8 flex items-center gap-3 animate-on-scroll">
           <span class="h-6 w-1 bg-purple rounded-full"></span>
-          <h2 class="text-xl font-black uppercase italic tracking-wide text-white">Последние новости</h2>
+          <h2 class="text-xl font-black uppercase italic tracking-wide text-white m-0">Последние новости</h2>
         </div>
         <div id="newsContainer" class="grid gap-6 sm:grid-cols-2"></div>
       </div>
@@ -303,51 +432,6 @@ body.upgrader-mode .disclaimer-bar { display: none; }
         </div>
       </div>
     </section>
-
-    <section class="mx-auto max-w-7xl px-4 py-20 sm:py-24">
-      <div class="mb-14 text-center animate-on-scroll">
-        <div class="inline-flex items-center gap-2 bg-purple/10 border border-purple/20 rounded-full px-4 py-1.5 mb-4"><span class="text-xs font-bold uppercase tracking-wider text-purple">⚡ возможности</span></div>
-        <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Всё для <span class="gradient-text">идеальной игры</span></h2>
-        <p class="mt-3 text-sm text-[#8a93a8] max-w-xl mx-auto">Все необходимые инструменты для возрождения оригинального игрового опыта</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-100"><h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Матчмейкинг</h3><p class="text-sm text-[#8a93a8] leading-relaxed">Оригинальный 5v5 матчмейкинг. Competitive, Wingman, Danger Zone и все классические режимы.</p></div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-200"><h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Инвентарь и дропы</h3><p class="text-sm text-[#8a93a8] leading-relaxed">Зарабатывайте скины, кейсы и граффити после матчей. Prime статус открывает доступ к ранговым играм.</p></div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-300"><h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Операции и награды</h3><p class="text-sm text-[#8a93a8] leading-relaxed">Участвуйте в операциях, выполняйте миссии и получайте эксклюзивные награды: агентов, скины, наклейки и нашивки.</p></div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-100"><h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Расширенные настройки</h3><p class="text-sm text-[#8a93a8] leading-relaxed">Кастомизация меню и другие параметры для тонкой настройки игры.</p></div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-200"><h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Внутриигровой магазин</h3><p class="text-sm text-[#8a93a8] leading-relaxed">Уникальный магазин с предметами, скинами и пропусками для разнообразия геймплея.</p></div>
-        <div class="group rounded-xl border border-white/5 bg-[#0f141b] p-7 card-hover animate-on-scroll delay-300"><h3 class="mb-2 text-base font-bold uppercase tracking-tight text-white group-hover:text-purple transition-colors">Ностальгический опыт</h3><p class="text-sm text-[#8a93a8] leading-relaxed">Полное погружение в атмосферу CS:GO образца 2021 и 2019 года. Классический геймплей.</p></div>
-      </div>
-    </section>
-
-    <section class="border-t border-white/5 bg-[#0d1018]">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:py-24">
-        <div class="mb-14 text-center animate-on-scroll">
-          <div class="inline-flex items-center gap-2 bg-purple/10 border border-purple/20 rounded-full px-4 py-1.5 mb-4"><span class="text-xs font-bold uppercase tracking-wider text-purple">🚀 старт</span></div>
-          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Как начать <span class="gradient-text">играть?</span></h2>
-          <p class="mt-3 text-sm text-[#8a93a8]">Три простых шага до первого матча в любимой игре</p>
-        </div>
-        <div class="grid gap-6 sm:grid-cols-3">
-          <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-100">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg">1</div>
-            <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Скачайте CS:GO</h3>
-            <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Откройте страницу CS:GO в Steam Store (App ID: 4465480) и добавьте в библиотеку.</p>
-            <a href="https://store.steampowered.com/app/4465480/CounterStrikeGlobal_Offensive/" target="_blank" class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-purple/30 bg-purple/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple hover:bg-purple/10 transition-colors">Steam Store →</a>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-200">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg">2</div>
-            <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Скачайте клиент</h3>
-            <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Загрузите архив с модом с нашего сайта и распакуйте его в любую папку.</p>
-            <a href="https://drive.google.com/file/d/1Ht7eGsUTvgTqBLrOgdejG_Bu_W4TZKP9/view?usp=drivesdk" target="_blank" class="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-purple/30 bg-purple/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple hover:bg-purple/10 transition-colors">Скачать мод →</a>
-          </div>
-          <div class="relative flex flex-col items-center rounded-xl border border-white/5 bg-[#0f141b] p-8 text-center card-hover animate-on-scroll delay-300">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-purple text-white font-black text-sm shadow-lg">3</div>
-            <h3 class="mb-3 mt-3 text-base font-bold text-white uppercase tracking-tight">Установите мод</h3>
-            <p class="text-sm text-[#8a93a8] leading-relaxed flex-1">Скопируйте содержимое архива в папку с CS:GO и замените файлы. Готово!</p>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 </div>
 
@@ -360,7 +444,6 @@ body.upgrader-mode .disclaimer-bar { display: none; }
       <div class="upload-zone__subtitle">или нажмите, чтобы выбрать файл</div>
     </div>
   </div>
-
   <div id="upgraderMain" style="display:none;">
     <div class="upgrader-layout">
       <div class="inventory-column">
@@ -416,10 +499,9 @@ body.upgrader-mode .disclaimer-bar { display: none; }
             <a class="reward-btn reward-btn--discord" href="https://discord.gg/PnBm2zJSyy" target="_blank" onclick="markDiscordClicked()">Присоединиться к Discord</a>
             <button class="reward-btn reward-btn--claim" id="discordClaimBtn" onclick="claimDiscordReward()">Забрать 10 BC</button>
           </div>
-
           <div class="reward-card quest-accent">
             <h4>🏆 Квест: 10 успешных апгрейдов скинов</h4>
-            <p>Сделай 10 <b>успешных</b> апгрейдов скинов (не наклеек) и получи <b>+80 BC</b> один раз.</p>
+            <p>Сделай 10 <b>успешных</b> апгрейдов скинов (не наклеек) и получи <b>+80 BC</b>.</p>
             <span class="reward-reward">💰 +80 BC</span>
             <div>
               <div class="quest-label"><span>Прогресс</span><span id="questProgressText">0 / 10</span></div>
@@ -427,15 +509,9 @@ body.upgrader-mode .disclaimer-bar { display: none; }
             </div>
             <button class="reward-btn reward-btn--claim" id="questClaimBtn" onclick="claimQuestReward()" disabled>Забрать 80 BC</button>
           </div>
-
-          <div class="reward-card">
-            <h4>📖 Как это работает</h4>
-            <p>1. Жми <b>Присоединиться к Discord</b> — награда разблокируется.<br>2. Жми <b>Забрать BC</b> — раз в 24 часа.<br>3. Квест считается только за успешные апгрейды <b>скинов</b> (не наклеек).<br>4. Все данные хранятся в браузере.</p>
-          </div>
         </div>
         <div style="padding:8px;border-top:1px solid rgba(155,89,182,.3);flex-shrink:0;">
           <button class="btn btn--ghost" style="width:100%;" id="saveBtn" onclick="saveInventory()">💾 Сохранить inventory.txt</button>
-          <div id="saveWarning" style="display:none;margin-top:6px;font-size:10px;color:#c39bd3;text-align:center;text-transform:uppercase;letter-spacing:.1em;">⚠ Режим бога: сохранение недоступно</div>
         </div>
       </div>
     </div>
@@ -467,7 +543,7 @@ body.upgrader-mode .disclaimer-bar { display: none; }
 <footer class="mt-auto border-t border-[rgba(60,70,92,0.3)] bg-[rgba(10,12,16,0.95)] backdrop-blur-sm">
   <div class="disclaimer-bar border-b border-white/5 bg-[#0a0d12]">
     <div class="mx-auto flex max-w-7xl items-start gap-2.5 px-4 py-3">
-      <p class="text-[11px] leading-relaxed text-purple/40">BurmaldaClient — фанатский проект для последней официальной версии Counter-Strike: Global Offensive (App ID: 4465480). Проект не связан с Valve Corporation.</p>
+      <p class="text-[11px] leading-relaxed text-purple/40">BurmaldaClient — фанатский проект. Проект не связан с Valve Corporation.</p>
     </div>
   </div>
   <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
@@ -479,15 +555,26 @@ body.upgrader-mode .disclaimer-bar { display: none; }
     <nav class="flex items-center gap-4 text-[11px] text-[#8a93a8]/60">
       <a class="hover:text-purple transition-colors" href="#" onclick="switchView('main');return false;">Главная</a>
       <a class="hover:text-purple transition-colors" href="#news" onclick="switchView('main');setTimeout(()=>document.getElementById('news').scrollIntoView({behavior:'smooth'}),50);return false;">Новости</a>
-      <a class="hover:text-purple transition-colors" href="#developers" onclick="switchView('main');setTimeout(()=>document.getElementById('developers').scrollIntoView({behavior:'smooth'}),50);return false;">Разработчики</a>
-      <a class="hover:text-purple transition-colors" href="https://dalink.to/s1veexz" target="_blank">Donation Alerts</a>
+      <a class="hover:text-purple transition-colors" href="#servers" onclick="switchView('main');setTimeout(()=>document.getElementById('servers').scrollIntoView({behavior:'smooth'}),50);return false;">Сервера</a>
     </nav>
     <div class="text-xs text-[#8a93a8]/40">© 2026 BurmaldaClient</div>
   </div>
 </footer>
 
 <script>
-/* ВАЛЮТА */
+/* ===== КОПИРОВАНИЕ IP ===== */
+function copyIP(text, element){
+  if(!navigator.clipboard){ alert('Браузер не поддерживает копирование'); return; }
+  navigator.clipboard.writeText(text).then(()=>{
+    const el = element.querySelector('.ip-text');
+    const orig = el.textContent;
+    el.textContent = 'Скопировано!';
+    el.style.color = '#10b981';
+    setTimeout(()=>{ el.textContent = orig; el.style.color = '#d1cdc4'; }, 1500);
+  });
+}
+
+/* ===== ВАЛЮТА ===== */
 const COINS_KEY='burmalda_coins_v1'; const COINS_START=100;
 function loadCoins(){ try{ const raw=localStorage.getItem(COINS_KEY); if(raw===null) return COINS_START; const v=parseInt(raw,10); return isNaN(v)?COINS_START:v; }catch(e){ return COINS_START; } }
 function saveCoins(v){ try{ localStorage.setItem(COINS_KEY, String(v)); }catch(e){} }
@@ -497,7 +584,7 @@ function pulseCoins(){ const el=document.getElementById('coinDisplay'); if(!el) 
 function floatCoinText(text, color){ const el=document.createElement('div'); el.className='coin-float'; el.textContent=text; if(color) el.style.color=color; const t=document.getElementById('coinDisplay'); const r=t?t.getBoundingClientRect():{left:window.innerWidth/2,top:60,width:100}; el.style.left=(r.left+r.width/2-20)+'px'; el.style.top=(r.top+8)+'px'; document.body.appendChild(el); setTimeout(()=>el.remove(),1300); }
 function addCoins(amount, reason){ if(!amount) return; coinsBalance += amount; saveCoins(coinsBalance); renderCoins(); pulseCoins(); const txt=(amount>0?'+':'')+amount+' BC'; floatCoinText(txt, amount>0?'#c39bd3':'#ff8b8b'); if(reason) showToast((amount>0?'💰 ':'💸 ')+txt+' — '+reason); }
 
-/* DISCORD */
+/* ===== DISCORD ===== */
 const DISCORD_CLICKED_KEY='burmalda_discord_clicked'; const DISCORD_LAST_KEY='burmalda_discord_lastclaim';
 const DISCORD_REWARD=10; const DISCORD_COOLDOWN=24*60*60*1000;
 function markDiscordClicked(){ try{ localStorage.setItem(DISCORD_CLICKED_KEY,'1'); }catch(e){} updateDiscordBtn(); }
@@ -508,40 +595,16 @@ function formatCooldown(ms){ const h=Math.floor(ms/3600000); const m=Math.floor(
 function updateDiscordBtn(){ const btn=document.getElementById('discordClaimBtn'); if(!btn) return; if(!discordClicked()){ btn.disabled=true; btn.textContent='Сначала зайди на Discord'; return; } const left=discordCooldownLeft(); if(left>0){ btn.disabled=true; btn.textContent='Через '+formatCooldown(left); } else { btn.disabled=false; btn.textContent='Забрать '+DISCORD_REWARD+' BC'; } }
 function claimDiscordReward(){ if(!discordClicked()){ showToast('Сначала нажми «Присоединиться к Discord»'); return; } const left=discordCooldownLeft(); if(left>0){ showToast('Уже забрано. Следующая награда через '+formatCooldown(left)); return; } try{ localStorage.setItem(DISCORD_LAST_KEY, String(Date.now())); }catch(e){} addCoins(DISCORD_REWARD,'награда Discord'); updateDiscordBtn(); }
 
-/* КВЕСТ — только успешные апгрейды скинов */
+/* ===== КВЕСТ ===== */
 const QUEST_COUNT_KEY='burmalda_quest_upgrades'; const QUEST_DONE_KEY='burmalda_quest_10done';
 const QUEST_GOAL=10; const QUEST_REWARD=80;
 function questCount(){ try{ const v=localStorage.getItem(QUEST_COUNT_KEY); return v?parseInt(v,10):0; }catch(e){ return 0; } }
 function questDone(){ try{ return localStorage.getItem(QUEST_DONE_KEY)==='1'; }catch(e){ return false; } }
-function incrementQuest(){
-  if(questDone()) return;
-  const c=Math.min(QUEST_GOAL, questCount()+1);
-  try{ localStorage.setItem(QUEST_COUNT_KEY, String(c)); }catch(e){}
-  updateQuestUI();
-}
-function updateQuestUI(){
-  const cnt=Math.min(QUEST_GOAL, questCount());
-  const done=questDone();
-  const text=document.getElementById('questProgressText');
-  const bar=document.getElementById('questProgressBar');
-  const btn=document.getElementById('questClaimBtn');
-  if(text) text.textContent=cnt+' / '+QUEST_GOAL;
-  if(bar) bar.style.width=(cnt/QUEST_GOAL*100)+'%';
-  if(btn){
-    if(done){ btn.disabled=true; btn.textContent='✓ Уже получено'; }
-    else if(cnt>=QUEST_GOAL){ btn.disabled=false; btn.textContent='Забрать '+QUEST_REWARD+' BC'; }
-    else { btn.disabled=true; btn.textContent='Нужно ещё '+(QUEST_GOAL-cnt)+' успешных'; }
-  }
-}
-function claimQuestReward(){
-  if(questDone()){ showToast('Награда уже получена'); return; }
-  if(questCount()<QUEST_GOAL){ showToast('Ещё не выполнено'); return; }
-  try{ localStorage.setItem(QUEST_DONE_KEY,'1'); }catch(e){}
-  addCoins(QUEST_REWARD,'квест 10 апгрейдов скинов');
-  updateQuestUI();
-}
+function incrementQuest(){ if(questDone()) return; const c=Math.min(QUEST_GOAL, questCount()+1); try{ localStorage.setItem(QUEST_COUNT_KEY, String(c)); }catch(e){} updateQuestUI(); }
+function updateQuestUI(){ const cnt=Math.min(QUEST_GOAL, questCount()); const done=questDone(); const text=document.getElementById('questProgressText'); const bar=document.getElementById('questProgressBar'); const btn=document.getElementById('questClaimBtn'); if(text) text.textContent=cnt+' / '+QUEST_GOAL; if(bar) bar.style.width=(cnt/QUEST_GOAL*100)+'%'; if(btn){ if(done){ btn.disabled=true; btn.textContent='✓ Уже получено'; } else if(cnt>=QUEST_GOAL){ btn.disabled=false; btn.textContent='Забрать '+QUEST_REWARD+' BC'; } else { btn.disabled=true; btn.textContent='Нужно ещё '+(QUEST_GOAL-cnt)+' успешных'; } } }
+function claimQuestReward(){ if(questDone()){ showToast('Награда уже получена'); return; } if(questCount()<QUEST_GOAL){ showToast('Ещё не выполнено'); return; } try{ localStorage.setItem(QUEST_DONE_KEY,'1'); }catch(e){} addCoins(QUEST_REWARD,'квест 10 апгрейдов скинов'); updateQuestUI(); }
 
-/* STEAM */
+/* ===== STEAM ===== */
 function openSteamLogin(){ document.getElementById('techworksOverlay').classList.add('open'); }
 function closeSteamLogin(e){ if(e && e.target && e.target.id!=='techworksOverlay') return; document.getElementById('techworksOverlay').classList.remove('open'); }
 document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ const ov=document.getElementById('techworksOverlay'); if(ov && ov.classList.contains('open')) ov.classList.remove('open'); } });
@@ -555,7 +618,7 @@ function switchView(name){
   document.querySelectorAll('.nav-item').forEach(a=>{ const n=a.getAttribute('data-nav'); a.classList.toggle('!bg-purple/10',n===name); a.classList.toggle('!border-purple/30',n===name); a.classList.toggle('!text-white',n===name); });
 }
 
-/* KV */
+/* ===== KV ===== */
 function parseKV(text){
   let i=0; const len=text.length; const isWS=c=>c===' '||c==='\t'||c==='\n'||c==='\r';
   function skipWS(){ while(i<len){ const c=text[i]; if(isWS(c)){i++;continue;} if(c==='/'&&text[i+1]==='/'){while(i<len&&text[i]!=='\n')i++;continue;} break; } }
@@ -592,7 +655,7 @@ function findAttrField(raw){ if(!raw||typeof raw!=='object') return null; if(raw
 function setRawAttr(raw,key,val){ let f=findAttrField(raw); if(!f){raw.attributes={};f='attributes';} raw[f][String(key)]=String(val); }
 function normalizeAttrField(raw){ if(!raw||typeof raw!=='object') return; if(raw.attribute&&typeof raw.attribute==='object'&&!raw.attributes){ raw.attributes=raw.attribute; delete raw.attribute; } }
 
-/* UPGRADER */
+/* ===== UPGRADER ===== */
 const API_MIRRORS=['https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en','https://cdn.statically.io/gh/ByMykel/CSGO-API/main/public/api/en'];
 const STICKER_ITEM_DEF_INDEX='1209'; const STICKER_KIT_ATTR='113';
 const RARITY_NAME_TO_ID={'Consumer Grade':1,'Industrial Grade':2,'Mil-Spec Grade':3,'Restricted':4,'Classified':5,'Covert':6,'Contraband':7,'Extraordinary':6,'Distinguished':2,'Exceptional':3,'Superior':4,'Master':5,'High Grade':2,'Remarkable':4,'Exotic':5};
@@ -671,7 +734,6 @@ const resultPopup=document.getElementById('resultPopup');
 const resultPopupContent=document.getElementById('resultPopupContent');
 const godToggle=document.getElementById('godToggle');
 const saveBtn=document.getElementById('saveBtn');
-const saveWarning=document.getElementById('saveWarning');
 const tabLibrary=document.getElementById('tabLibrary');
 const tabShop=document.getElementById('tabShop');
 const tabRewards=document.getElementById('tabRewards');
@@ -703,7 +765,28 @@ function setShopFilter(f){
 }
 
 const SHOP_PRICE_SKIN = {'Consumer Grade':15,'Industrial Grade':40,'Mil-Spec Grade':90,'Restricted':220,'Classified':500,'Covert':1200,'Contraband':1800,'Extraordinary':1800,'Distinguished':220,'Exceptional':500,'Superior':900,'Master':1500,'High Grade':90,'Remarkable':220,'Exotic':500};
-function shopPriceSkin(skin){ return SHOP_PRICE_SKIN[skin.rarity]||60; }
+const LEGENDARY_SKINS = [
+  { match: /dragon lore/i, price: 150000 },
+  { match: /howl/i, price: 120000 },
+  { match: /wild lotus/i, price: 80000 },
+  { match: /gungnir/i, price: 65000 },
+  { match: /medusa/i, price: 50000 },
+];
+function shopPriceSkin(skin){
+  const name=(skin.name||'').toLowerCase(); const defIdx=Number(skin.def_index);
+  for(const leg of LEGENDARY_SKINS){ if(leg.match.test(name)) return leg.price; }
+  let base = SHOP_PRICE_SKIN[skin.rarity] || 60;
+  if(defIdx >= 500 && defIdx <= 526) base *= 5;
+  if(defIdx >= 5027 && defIdx <= 5033) base *= 4;
+  if(/asiimov/i.test(name)) base *= 2;
+  if(/hyper beast/i.test(name)) base *= 2;
+  if(/printstream/i.test(name)) base *= 3;
+  if(/neon rider|neon revolution/i.test(name)) base *= 2.5;
+  if(/\bfade\b/i.test(name)) base *= 4;
+  if(/doppler/i.test(name)) base *= 4;
+  if(/tiger tooth|marble fade|autotronic|gamma doppler|slaughter/i.test(name)) base *= 3;
+  return Math.round(base);
+}
 function shopPriceSticker(sticker){
   const name=(sticker.name||'').toLowerCase();
   const isKat14=/katowice 2014/i.test(name); const isCol14=/cologne 2014/i.test(name);
@@ -729,12 +812,11 @@ function renderShopList(q){
     const price = shopPriceAny(item);
     const canBuy = coinsBalance>=price && state.items.length>0 && !state.godMode;
     const rarityColor = getRarityColor(item.rarity);
-    const label = shopLabel(item);
     return '<div class="shop-card" onclick="buyItem(\''+escapeAttr(item.id)+'\')">'+
       '<div class="shop-card__rarity" style="background:'+rarityColor+'"></div>'+
       '<div class="shop-card__thumb"><img src="'+item.image+'" alt="" loading="lazy" onerror="this.style.display=\'none\'"></div>'+
       '<div class="shop-card__info"><div class="shop-card__name">'+escapeHtml(item.name)+'</div>'+
-      '<div class="shop-card__meta">'+label+'</div></div>'+
+      '<div class="shop-card__meta">'+shopLabel(item)+'</div></div>'+
       '<button class="shop-card__buy'+(canBuy?'':' insufficient')+'">'+price+' BC</button></div>';
   }).join('') || '<div style="padding:16px;text-align:center;color:var(--csgo-text-muted);">Ничего не найдено</div>';
 }
@@ -750,11 +832,8 @@ function buyItem(id){
   const usedIds = Object.keys(state.itemsMap).map(Number).filter(n=>!isNaN(n));
   const newId = String((usedIds.length ? Math.max.apply(null,usedIds) : 0) + 1);
   let newItem;
-  if(item.type==='sticker'){
-    newItem = { inventory:'3', def_index: STICKER_ITEM_DEF_INDEX, level:'1', quality:'4', flags:'0', origin:'8', in_use:'0', rarity:'4', attributes: { '113': String(item.sticker_index), '114': '0' } };
-  } else {
-    newItem = { inventory:'3', def_index: item.def_index, level:'1', quality:'0', flags:'0', origin:'8', in_use:'0', rarity: String(RARITY_NAME_TO_ID[item.rarity] || 4), attributes: { '6': String(item.paint_index), '7': String(Math.floor(Math.random()*1000)), '8': '0.000000' } };
-  }
+  if(item.type==='sticker'){ newItem = { inventory:'3', def_index: STICKER_ITEM_DEF_INDEX, level:'1', quality:'4', flags:'0', origin:'8', in_use:'0', rarity:'4', attributes: { '113': String(item.sticker_index), '114': '0' } }; }
+  else { newItem = { inventory:'3', def_index: item.def_index, level:'1', quality:'0', flags:'0', origin:'8', in_use:'0', rarity: String(RARITY_NAME_TO_ID[item.rarity] || 4), attributes: { '6': String(item.paint_index), '7': String(Math.floor(Math.random()*1000)), '8': '0.000000' } }; }
   state.itemsMap[newId] = newItem;
   state.items.push({ id: newId, def_index: newItem.def_index, quality: newItem.quality, rarity: newItem.rarity, attributes: newItem.attributes, raw: newItem });
   state.inventorySkins.push({ id: newId, def_index: newItem.def_index, quality: newItem.quality, rarity: newItem.rarity, attributes: newItem.attributes, raw: newItem, skin: item });
@@ -774,12 +853,7 @@ function toggleGodMode(){
   state.godMode=!state.godMode;
   godToggle.classList.toggle('active', state.godMode);
   showToast(state.godMode ? '⚡ Режим бога включён' : 'Режим бога выключен');
-  updateSaveBtn();
   if(state.targetTab==='shop') renderShopList(targetSearch.value);
-}
-function updateSaveBtn(){
-  if(state.godMode){ saveBtn.setAttribute('disabled','disabled'); saveBtn.style.opacity='0.4'; saveBtn.style.cursor='not-allowed'; saveWarning.style.display='block'; }
-  else { saveBtn.removeAttribute('disabled'); saveBtn.style.opacity=''; saveBtn.style.cursor=''; saveWarning.style.display='none'; }
 }
 
 uploadZone.addEventListener('click', () => fileInput.click());
@@ -814,7 +888,7 @@ function processInventoryText(text, filename){
     if(state.items.length===0){ showToast('Предметов не найдено'); return; }
     state.inventorySkins=state.items.map(item=>{ const pk=(item.attributes['6']||'').trim(); const skin=SKINS.find(s=>s.type==='skin'&&s.paint_index===pk&&s.def_index===String(item.def_index)); return {...item, skin}; });
     uploadScreen.style.display='none'; upgraderMain.style.display='flex';
-    renderInventory(); updateWheel(); updateSaveBtn(); updateDiscordBtn(); updateQuestUI();
+    renderInventory(); updateWheel(); updateDiscordBtn(); updateQuestUI();
     if(state.targetTab==='shop') renderShopList('');
     else if(state.targetTab==='library') renderTargetList('');
     showToast('Загружено '+state.items.length+' предметов');
@@ -950,7 +1024,7 @@ spinBtn.addEventListener('click', () => {
   wheelPointer.style.transform='rotate('+totalDeg+'deg)';
 
   setTimeout(()=>{
-    state.isSpinning=false; spinBtn.textContent='⚡ Прокачка';
+    state.isSpinning=false; spinBtn.textContent='⚡ Прокачать';
     godToggle.classList.remove('locked');
     document.querySelectorAll('.mult-btn').forEach(b=>{b.style.pointerEvents='';b.style.opacity='';});
     sourceSlot.style.pointerEvents=''; targetSlot.style.pointerEvents='';
@@ -972,10 +1046,7 @@ spinBtn.addEventListener('click', () => {
           const idx2=state.inventorySkins.findIndex(i=>i.id===old.id); if(idx2!==-1) state.inventorySkins[idx2]={...newItem,rarity:String(newRarityId),skin:target};
         }
       }
-      // Засчитываем квест ТОЛЬКО если это апгрейд СКИНА (не наклейки)
-      if(targetAtSpin.type==='skin'){
-        incrementQuest();
-      }
+      if(targetAtSpin.type==='skin'){ incrementQuest(); }
       showResultModal(true,target,false); addCoins(10,'успешный апгрейд');
     } else {
       if(godModeAtSpin){ showResultModal(false,null,true); addCoins(2,'попытка (режим бога)'); }
@@ -1045,7 +1116,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* НОВОСТИ */
+/* ===== НОВОСТИ ===== */
 const newsData=[
   {headline:"Запретная Зона расширяется!",body:"Эксперимент развивается. Новые карты и вещи!",tag:"обновление",image:"https://clan.steamstatic.com/images/3381077/80621b2b2efdb8e77fefcf7689fd03dd5003782f.png",url:"https://store.steampowered.com/news/app/730"},
   {headline:"Операция «Хищные Воды»",body:"Новые карты, миссии и способы игры!",tag:"обновление",image:"https://images.steamusercontent.com/ugc/4122474773860967943/56E309B41788AA9E886F768D984286DBEA241198/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",url:"https://store.steampowered.com/news/app/730"}
@@ -1064,12 +1135,25 @@ document.getElementById('newsContainer').innerHTML=newsData.map(item=>`
     </div>
   </div>`).join('');
 
-/* Анимации появления */
-const observer=new IntersectionObserver((entries)=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); },{root:null,rootMargin:'0px 0px -10% 0px',threshold:0.15});
-document.querySelectorAll('.animate-on-scroll').forEach(el=>{ if(!el.classList.contains('visible')) observer.observe(el); });
+/* ===== OBSERVER (АНИМАЦИИ ПОЯВЛЕНИЯ) ===== */
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{root:null,rootMargin:'0px 0px -10% 0px',threshold:0.15});
+document.querySelectorAll('.animate-on-scroll').forEach(el=>{
+  if(!el.classList.contains('visible')) observer.observe(el);
+});
 
-/* Инициализация */
-renderCoins(); updateWheel(); updateSpinBtn(); updateDiscordBtn(); updateQuestUI();
+/* ===== ИНИЦИАЛИЗАЦИЯ ===== */
+renderCoins();
+updateWheel();
+updateSpinBtn();
+updateDiscordBtn();
+updateQuestUI();
 setInterval(updateDiscordBtn, 60000);
 </script>
 </body>
